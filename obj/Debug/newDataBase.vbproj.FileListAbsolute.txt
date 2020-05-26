@@ -1,0 +1,14 @@
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.vbprojAssemblyReference.cache
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.mainForm.resources
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.Resources.resources
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.vbproj.GenerateResource.cache
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\bin\Debug\newDataBase.exe.config
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\bin\Debug\newDataBase.exe
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\bin\Debug\newDataBase.pdb
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\bin\Debug\newDataBase.xml
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.exe
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.xml
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.pdb
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\bin\Debug\EPPlus.dll
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\bin\Debug\EPPlus.xml
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.vbproj.CopyComplete
