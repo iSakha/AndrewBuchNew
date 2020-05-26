@@ -182,31 +182,48 @@ Public Class mainForm
     Private Sub item_belimlight_Click(sender As Object, e As EventArgs) Handles item_belimlight.Click
 
         iCompany = 1
+        create_dataset()
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(252, 228, 214)
-        'dgv.DataSource = mainForm.lightDataset.Tables(0)
-        'format_dgv_dataset(mainForm.tbl_Lighting_tables(0, 0).Name, c)
+        dgv.DataSource = dts.Tables(0)
+        format_dgv_dataset(c)
 
     End Sub
 
     Private Sub item_PRLighting_Click(sender As Object, e As EventArgs) Handles item_PRLighting.Click
         iCompany = 2
+        create_dataset()
         writeToLabelCompany(sender)
+        Dim c As Color = Color.FromArgb(221, 235, 247)
+        dgv.DataSource = dts.Tables(1)
+        format_dgv_dataset(c)
     End Sub
 
     Private Sub item_blackout_Click(sender As Object, e As EventArgs) Handles item_blackout.Click
         iCompany = 3
+        create_dataset()
         writeToLabelCompany(sender)
+        Dim c As Color = Color.FromArgb(237, 237, 237)
+        dgv.DataSource = dts.Tables(2)
+        format_dgv_dataset(c)
     End Sub
 
     Private Sub item_vision_Click(sender As Object, e As EventArgs) Handles item_vision.Click
         iCompany = 4
+        create_dataset()
         writeToLabelCompany(sender)
+        Dim c As Color = Color.FromArgb(226, 239, 218)
+        dgv.DataSource = dts.Tables(3)
+        format_dgv_dataset(c)
     End Sub
 
     Private Sub item_stage_Click(sender As Object, e As EventArgs) Handles item_stage.Click
         iCompany = 5
+        create_dataset()
         writeToLabelCompany(sender)
+        Dim c As Color = Color.FromArgb(237, 226, 246)
+        dgv.DataSource = dts.Tables(4)
+        format_dgv_dataset(c)
     End Sub
 #End Region
 
@@ -233,7 +250,7 @@ Public Class mainForm
     '===================================================================================      
     '                === Format DataGridView ===
     '===================================================================================
-    Sub format_dgv_dataset(_dtName As String, _color As Color)
+    Sub format_dgv_dataset(_color As Color)
 
         dgv.Columns(0).Width = 40                ' #
         dgv.Columns(1).Width = 175               ' Fixture
@@ -269,6 +286,7 @@ Public Class mainForm
         create_dataset()
 
         Console.WriteLine(dts.Tables.Count)
+        dgv.DataSource = dts.Tables(0)
     End Sub
 
 End Class

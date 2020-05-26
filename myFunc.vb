@@ -131,7 +131,8 @@ Module myFunc
 
             xlTable = ws.Tables(k)
             c_xlTable = xlTable.Address.Columns
-            Console.WriteLine(c_xlTable)
+            r_xlTable = xlTable.Address.Rows
+
             adr = xlTable.Address.Address
             rng = ws.Cells(adr)
 
