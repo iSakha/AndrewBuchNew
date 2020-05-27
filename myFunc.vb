@@ -87,22 +87,7 @@ Module myFunc
 
     End Sub
 
-    '===================================================================================      
-    '                === Create datatable ===
-    '===================================================================================
 
-    Sub create_dt()
-
-        Dim dt As DataTable
-        Dim xlTable As ExcelTable
-        Dim adr As String
-        Dim rng As ExcelRange
-        Dim r_xlTable, c_xlTable As Integer
-
-
-
-
-    End Sub
 
 
     '===================================================================================
@@ -155,7 +140,7 @@ Module myFunc
 
             'Add Rows from Excel table
 
-            For i = 1 To r_xlTable - 2
+            For i = 1 To r_xlTable - 1
                 row = dt.Rows.Add()
 
                 For j = 0 To c_xlTable - 2
@@ -184,4 +169,45 @@ Module myFunc
             mainForm.dts.Tables.Add(dt)
         Next k
     End Sub
+
+    '===================================================================================
+    '             === CellClick on DGV ===
+    '===================================================================================
+    Sub dgv_clickCell(_sender As Object, _e As DataGridViewCellEventArgs)
+
+        Dim index As Integer
+        index = _e.RowIndex
+        'Console.WriteLine(index)
+        Dim selectedRow As DataGridViewRow
+        selectedRow = _sender.Rows(index)
+
+        mainForm.rtb_fixtureName.Text = selectedRow.Cells(1).Value.ToString
+        mainForm.txt_qty.Text = selectedRow.Cells(2).Value.ToString
+        mainForm.rtb_FirstName.Text = selectedRow.Cells(3).Value.ToString
+        mainForm.txt_qty1.Text = selectedRow.Cells(4).Value.ToString
+        mainForm.rtb_SecondName.Text = selectedRow.Cells(5).Value.ToString
+        mainForm.txt_qty2.Text = selectedRow.Cells(6).Value.ToString
+        mainForm.rtb_ThirdName.Text = selectedRow.Cells(7).Value.ToString
+        mainForm.txt_qty3.Text = selectedRow.Cells(8).Value.ToString
+
+        mainForm.dgv.Rows(index).Selected = True
+
+
+    End Sub
+
+    Sub writeZeroInQtyTxt()
+        If mainForm.txt_qty.Text = "" Then
+            mainForm.txt_qty.Text = 0
+        End If
+        If mainForm.txt_qty1.Text = "" Then
+            mainForm.txt_qty1.Text = 0
+        End If
+        If mainForm.txt_qty2.Text = "" Then
+            mainForm.txt_qty2.Text = 0
+        End If
+        If mainForm.txt_qty3.Text = "" Then
+            mainForm.txt_qty3.Text = 0
+        End If
+    End Sub
+
 End Module

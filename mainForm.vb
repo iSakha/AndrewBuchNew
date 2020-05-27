@@ -236,6 +236,7 @@ Public Class mainForm
         Me.GroupBox2.Visible = True
         Me.lbl_dpartmentValue.Text = _department
         Me.lbl_subsectionValue.Text = _sender.text
+        Me.dgv.DataSource = Nothing
     End Sub
 
 
@@ -243,6 +244,10 @@ Public Class mainForm
     Sub writeToLabelCompany(_sender As Object)
         Me.GroupBox3.Visible = True
         Me.lbl_companyValue.Text = _sender.text
+    End Sub
+
+    Private Sub dgv_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv.CellClick
+        dgv_clickCell(sender, e)
     End Sub
 
 
@@ -279,14 +284,20 @@ Public Class mainForm
     '===================================================================================
     Private Sub btn_test_Click(sender As Object, e As EventArgs) Handles btn_test.Click
 
-        Dim xlTable As ExcelTable
+        '-----------------------------------------------------------------------------------------
+        'Dim xlTable As ExcelTable
 
-        xlTable = i_superPivotDict(iDepartment)(iCategory)(iCompany)
+        'xlTable = i_superPivotDict(iDepartment)(iCategory)(iCompany)
 
-        create_dataset()
+        'create_dataset()
 
-        Console.WriteLine(dts.Tables.Count)
-        dgv.DataSource = dts.Tables(0)
+        'Console.WriteLine(dts.Tables.Count)
+        'dgv.DataSource = dts.Tables(0)
+        '-----------------------------------------------------------------------------------------
+
+        dgv_result.Rows.Add()
+        dgv_result.Rows(0).Cells(0).Value = "Hello,world!"
+
     End Sub
 
 End Class
