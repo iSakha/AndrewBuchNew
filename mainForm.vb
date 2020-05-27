@@ -16,9 +16,12 @@ Public Class mainForm
     Public i_pivot_wsDict As Dictionary(Of Integer, Dictionary(Of Integer, ExcelWorksheet))
     Public i_pivotTableDict As Dictionary(Of Integer, Dictionary(Of Integer, ExcelTable))
     Public i_superPivotDict As Dictionary(Of Integer, Dictionary(Of Integer, Dictionary(Of Integer, ExcelTable)))
+
     Public iDepartment, iCategory, iCompany As Integer
 
     Public dts As DataSet
+
+    Public sCompany() As String = {"belimlight", "PRLighting", "blackout", "vision", "stage"}
     Private Sub FolderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FolderToolStripMenuItem.Click
 
         loadDataBaseFolder()
@@ -227,6 +230,16 @@ Public Class mainForm
     End Sub
 #End Region
 
+    Private Sub btn_prev_Click(sender As Object, e As EventArgs) Handles btn_prev.Click
+        prevRecord()
+        calcQuantity()
+    End Sub
+
+    Private Sub btn_next_Click(sender As Object, e As EventArgs) Handles btn_next.Click
+        nextRecord()
+        calcQuantity()
+    End Sub
+
     '===================================================================================
     '             === MY FUNCTIONS ===
     '===================================================================================
@@ -248,9 +261,12 @@ Public Class mainForm
 
     Private Sub dgv_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv.CellClick
         dgv_clickCell(sender, e)
+        calcQuantity()
     End Sub
 
+    Private Sub item_summary_Click(sender As Object, e As EventArgs) Handles item_summary.Click
 
+    End Sub
 
     '===================================================================================      
     '                === Format DataGridView ===
@@ -295,9 +311,15 @@ Public Class mainForm
         'dgv.DataSource = dts.Tables(0)
         '-----------------------------------------------------------------------------------------
 
-        dgv_result.Rows.Add()
-        dgv_result.Rows(0).Cells(0).Value = "Hello,world!"
+        'dgv_result.Rows.Add()
+        'dgv_result.Rows(0).Cells(0).Value = "Hello,world!"
 
+        '-----------------------------------------------------------------------------------------
+        'calcQuantity()
+        '-----------------------------------------------------------------------------------------
+        'dgv_result.Item(6, 0).Style.BackColor = Color.Red
+        '-----------------------------------------------------------------------------------------
+        sumForm.Show()
     End Sub
 
 End Class

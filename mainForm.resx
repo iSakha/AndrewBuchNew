@@ -238,6 +238,28 @@
   <metadata name="FBD.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
   </metadata>
+  <data name="btn_next.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAAoAAAAMCAYAAABbayygAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wQAADsEBuJFr7QAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC41ZYUyZQAAAOtJREFUKFNjgAFr
+        a+tzQkJC/0VERMBYVFT0p6urax5UGgFsbW3PFRYW/q+pqQHj+Pj4n5aWlkNLYWVlpUZBQYG/jY3NvaKi
+        IrjChISE30Bfz66trfWfMmUKD0NqampKcHDw87CwsD9ATXCFIE0BAQFfMzIyTrS0tEgz1NfXy+Tk5GzI
+        zc39VV1dDVdYUVHxLzs7+wZQzCU0NJQZZDsj0Gj5kpKSzUANYMVlZWX/UlJS3gKtzZo4cSI72I0wMHfu
+        XFGgW9fm5+d/zczMvNfY2FgCtI0FKo0KmpubZUtLS9OApjoAFbFBhYGAgQEAXoaiUrSJ8fMAAAAASUVO
+        RK5CYII=
+</value>
+  </data>
+  <data name="btn_prev.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAAoAAAAMCAYAAABbayygAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wgAADsIBFShKgAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC41ZYUyZQAAAO5JREFUKFNjQAbN
+        zc2ypaWladXV1Q719fVsUGFUMHfuXNGCgoK1+fn5XzMzM+81NjaWABWzQKXBgHHKlCnyJSUlm3Nycn4B
+        TftfVlb2LyUl5W1tbW3WxIkT2cGqgLpkgAo25ObmghXV1NSAcUVFxb/s7OwbQDGX0NBQZobU1NSU4ODg
+        52FhYX8qKyvhCouKiv4HBAR8zcjIONHS0iLNAJTUALrN38bG5h5IEqYwISHht6ur62yg9f5Ap/GArQcB
+        W1vbc4WFhXCF8fHxPy0tLfOg0ggwFBRaW1ufExIS+i8iIgLGoqKiP4G+hipkYAAAwDSiUojvExIAAAAA
+        SUVORK5CYII=
+</value>
+  </data>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>

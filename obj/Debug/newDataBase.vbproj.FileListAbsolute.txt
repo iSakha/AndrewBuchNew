@@ -12,3 +12,4 @@ C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\D
 C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\bin\Debug\EPPlus.dll
 C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\bin\Debug\EPPlus.xml
 C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.vbproj.CopyComplete
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.sumForm.resources

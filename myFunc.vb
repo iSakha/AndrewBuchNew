@@ -87,9 +87,6 @@ Module myFunc
 
     End Sub
 
-
-
-
     '===================================================================================
     '             === Create dataset ===
     '===================================================================================
@@ -143,7 +140,7 @@ Module myFunc
             For i = 1 To r_xlTable - 1
                 row = dt.Rows.Add()
 
-                For j = 0 To c_xlTable - 2
+                For j = 0 To c_xlTable - 1
 
                     If rng.Value(i, j) = Nothing Then
                         Select Case j
@@ -171,6 +168,12 @@ Module myFunc
     End Sub
 
     '===================================================================================
+    '             === Create summary table ===
+    '===================================================================================
+    Sub createSummary_dt()
+
+    End Sub
+    '===================================================================================
     '             === CellClick on DGV ===
     '===================================================================================
     Sub dgv_clickCell(_sender As Object, _e As DataGridViewCellEventArgs)
@@ -193,6 +196,133 @@ Module myFunc
         mainForm.dgv.Rows(index).Selected = True
 
 
+    End Sub
+#Region "next/prev buttons"
+    '===================================================================================
+    '             === Prev record ===
+    '===================================================================================
+    Sub prevRecord()
+
+        Dim index As Integer
+        Dim selectedRow As DataGridViewRow
+
+
+        index = mainForm.dgv.CurrentRow.Index
+
+        mainForm.dgv.ClearSelection()
+        'sumForm.dgv_sum.ClearSelection()
+        mainForm.dgv.CurrentCell = mainForm.dgv.Item(0, index)
+        mainForm.dgv.Rows(index).Selected = True
+
+
+        If index = 0 Then
+            index = mainForm.dgv.Rows.Count - 1
+        End If
+
+
+
+        index = index - 1
+        mainForm.dgv.CurrentCell = mainForm.dgv.Item(0, index)
+        mainForm.dgv.Rows(index).Selected = True
+        'sumForm.dgv_sum.Rows(index).Selected = True
+
+        selectedRow = mainForm.dgv.Rows(index)
+
+        mainForm.rtb_fixtureName.Text = selectedRow.Cells(1).Value.ToString
+        mainForm.txt_qty.Text = selectedRow.Cells(2).Value.ToString
+        mainForm.rtb_FirstName.Text = selectedRow.Cells(3).Value.ToString
+        mainForm.txt_qty1.Text = selectedRow.Cells(4).Value.ToString
+        mainForm.rtb_SecondName.Text = selectedRow.Cells(5).Value.ToString
+        mainForm.txt_qty2.Text = selectedRow.Cells(6).Value.ToString
+        mainForm.rtb_ThirdName.Text = selectedRow.Cells(7).Value.ToString
+        mainForm.txt_qty3.Text = selectedRow.Cells(8).Value.ToString
+
+
+        'calcQuantity()
+
+    End Sub
+
+    '===================================================================================
+    '             === Next record ===
+    '===================================================================================
+    Sub nextRecord()
+        Dim index As Integer
+        Dim selectedRow As DataGridViewRow
+
+        index = mainForm.dgv.CurrentRow.Index
+
+        mainForm.dgv.ClearSelection()
+        'sumForm.dgv_sum.ClearSelection()
+        mainForm.dgv.CurrentCell = mainForm.dgv.Item(0, index)
+        mainForm.dgv.Rows(index).Selected = True
+
+        If index = mainForm.dgv.Rows.Count - 2 Then
+            index = -1
+        End If
+
+
+
+        index = index + 1
+        mainForm.dgv.CurrentCell = mainForm.dgv.Item(0, index)
+        mainForm.dgv.Rows(index).Selected = True
+        'sumForm.dgv_sum.Rows(index).Selected = True
+
+        selectedRow = mainForm.dgv.Rows(index)
+
+        mainForm.rtb_fixtureName.Text = selectedRow.Cells(1).Value.ToString
+        mainForm.txt_qty.Text = selectedRow.Cells(2).Value.ToString
+        mainForm.rtb_FirstName.Text = selectedRow.Cells(3).Value.ToString
+        mainForm.txt_qty1.Text = selectedRow.Cells(4).Value.ToString
+        mainForm.rtb_SecondName.Text = selectedRow.Cells(5).Value.ToString
+        mainForm.txt_qty2.Text = selectedRow.Cells(6).Value.ToString
+        mainForm.rtb_ThirdName.Text = selectedRow.Cells(7).Value.ToString
+        mainForm.txt_qty3.Text = selectedRow.Cells(8).Value.ToString
+
+    End Sub
+#End Region
+
+    '===================================================================================
+    '             === Calculate quantity ===
+    '===================================================================================
+    Sub calcQuantity()
+
+        Dim index As Integer
+        Dim i, j, qty, sum As Integer
+
+        i = mainForm.iCategory
+
+        index = mainForm.dgv.CurrentRow.Index
+
+        For j = 0 To mainForm.dts.Tables.Count - 1
+            sum = 0
+            qty = mainForm.dts.Tables(j).Rows(index).Item(4)
+            sum = sum + qty
+            qty = mainForm.dts.Tables(j).Rows(index).Item(6)
+            sum = sum + qty
+            qty = mainForm.dts.Tables(j).Rows(index).Item(8)
+            sum = sum + qty
+
+            mainForm.dgv_result.Rows(0).Cells(j + 1).Value = sum
+
+
+        Next j
+
+        Dim smetaQty As Integer = mainForm.dts.Tables(0).Rows(index).Item(2)
+
+        Dim companiesQty As Integer = mainForm.dgv_result.Rows(0).Cells(1).Value +
+        mainForm.dgv_result.Rows(0).Cells(2).Value +
+        mainForm.dgv_result.Rows(0).Cells(3).Value +
+        mainForm.dgv_result.Rows(0).Cells(4).Value +
+        mainForm.dgv_result.Rows(0).Cells(5).Value
+
+        mainForm.dgv_result.Rows(0).Cells(0).Value = smetaQty
+        mainForm.dgv_result.Rows(0).Cells(6).Value = smetaQty - companiesQty
+
+        If (smetaQty - companiesQty = 0) Then
+            mainForm.dgv_result.Item(6, 0).Style.BackColor = Color.LightGreen
+        Else
+            mainForm.dgv_result.Item(6, 0).Style.BackColor = Color.LightPink
+        End If
     End Sub
 
     Sub writeZeroInQtyTxt()
