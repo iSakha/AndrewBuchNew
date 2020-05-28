@@ -226,12 +226,6 @@ Module myFunc
     End Sub
 
     '===================================================================================
-    '             === Create summary table ===
-    '===================================================================================
-    Sub createSummary_dt()
-
-    End Sub
-    '===================================================================================
     '             === CellClick on DGV ===
     '===================================================================================
     Sub dgv_clickCell(_sender As Object, _e As DataGridViewCellEventArgs)
@@ -252,7 +246,8 @@ Module myFunc
         mainForm.txt_qty3.Text = selectedRow.Cells(8).Value.ToString
 
         mainForm.dgv.Rows(index).Selected = True
-
+        sumForm.dgv_sum.ClearSelection()
+        sumForm.dgv_sum.Rows(index).Selected = True
 
     End Sub
 #Region "next/prev buttons"
@@ -268,7 +263,8 @@ Module myFunc
         index = mainForm.dgv.CurrentRow.Index
 
         mainForm.dgv.ClearSelection()
-        'sumForm.dgv_sum.ClearSelection()
+        sumForm.dgv_sum.ClearSelection()
+
         mainForm.dgv.CurrentCell = mainForm.dgv.Item(0, index)
         mainForm.dgv.Rows(index).Selected = True
 
@@ -282,7 +278,7 @@ Module myFunc
         index = index - 1
         mainForm.dgv.CurrentCell = mainForm.dgv.Item(0, index)
         mainForm.dgv.Rows(index).Selected = True
-        'sumForm.dgv_sum.Rows(index).Selected = True
+        sumForm.dgv_sum.Rows(index).Selected = True
 
         selectedRow = mainForm.dgv.Rows(index)
 
@@ -310,7 +306,8 @@ Module myFunc
         index = mainForm.dgv.CurrentRow.Index
 
         mainForm.dgv.ClearSelection()
-        'sumForm.dgv_sum.ClearSelection()
+        sumForm.dgv_sum.ClearSelection()
+
         mainForm.dgv.CurrentCell = mainForm.dgv.Item(0, index)
         mainForm.dgv.Rows(index).Selected = True
 
@@ -323,7 +320,7 @@ Module myFunc
         index = index + 1
         mainForm.dgv.CurrentCell = mainForm.dgv.Item(0, index)
         mainForm.dgv.Rows(index).Selected = True
-        'sumForm.dgv_sum.Rows(index).Selected = True
+        sumForm.dgv_sum.Rows(index).Selected = True
 
         selectedRow = mainForm.dgv.Rows(index)
 
@@ -347,11 +344,11 @@ Module myFunc
         Dim index As Integer
         Dim i, j, qty, sum As Integer
 
-        i = mainForm.iCategory
+        'i = mainForm.iCategory + 1
 
         index = mainForm.dgv.CurrentRow.Index
 
-        For j = 0 To mainForm.dts.Tables.Count - 1
+        For j = 1 To mainForm.dts.Tables.Count - 1
             sum = 0
             qty = mainForm.dts.Tables(j).Rows(index).Item(4)
             sum = sum + qty
@@ -360,7 +357,7 @@ Module myFunc
             qty = mainForm.dts.Tables(j).Rows(index).Item(8)
             sum = sum + qty
 
-            mainForm.dgv_result.Rows(0).Cells(j + 1).Value = sum
+            mainForm.dgv_result.Rows(0).Cells(j).Value = sum
 
 
         Next j
