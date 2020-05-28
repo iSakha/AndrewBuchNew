@@ -91,6 +91,7 @@ Partial Class mainForm
         Me.item_blackout = New System.Windows.Forms.ToolStripMenuItem()
         Me.item_vision = New System.Windows.Forms.ToolStripMenuItem()
         Me.item_stage = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_summary = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btn_test = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -128,7 +129,7 @@ Partial Class mainForm
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.item_summary = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btn_cancel = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -510,32 +511,38 @@ Partial Class mainForm
         'item_belimlight
         '
         Me.item_belimlight.Name = "item_belimlight"
-        Me.item_belimlight.Size = New System.Drawing.Size(180, 22)
+        Me.item_belimlight.Size = New System.Drawing.Size(169, 22)
         Me.item_belimlight.Text = "&Belimlight"
         '
         'item_PRLighting
         '
         Me.item_PRLighting.Name = "item_PRLighting"
-        Me.item_PRLighting.Size = New System.Drawing.Size(180, 22)
+        Me.item_PRLighting.Size = New System.Drawing.Size(169, 22)
         Me.item_PRLighting.Text = "&PRLighting"
         '
         'item_blackout
         '
         Me.item_blackout.Name = "item_blackout"
-        Me.item_blackout.Size = New System.Drawing.Size(180, 22)
+        Me.item_blackout.Size = New System.Drawing.Size(169, 22)
         Me.item_blackout.Text = "&Blackout"
         '
         'item_vision
         '
         Me.item_vision.Name = "item_vision"
-        Me.item_vision.Size = New System.Drawing.Size(180, 22)
+        Me.item_vision.Size = New System.Drawing.Size(169, 22)
         Me.item_vision.Text = "&Multivision"
         '
         'item_stage
         '
         Me.item_stage.Name = "item_stage"
-        Me.item_stage.Size = New System.Drawing.Size(180, 22)
+        Me.item_stage.Size = New System.Drawing.Size(169, 22)
         Me.item_stage.Text = "&Stage engineering"
+        '
+        'item_summary
+        '
+        Me.item_summary.Name = "item_summary"
+        Me.item_summary.Size = New System.Drawing.Size(169, 22)
+        Me.item_summary.Text = "Сводная таблица"
         '
         'Panel1
         '
@@ -651,7 +658,7 @@ Partial Class mainForm
         'dgv
         '
         Me.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgv.Location = New System.Drawing.Point(6, 104)
+        Me.dgv.Location = New System.Drawing.Point(85, 120)
         Me.dgv.Name = "dgv"
         Me.dgv.ReadOnly = True
         Me.dgv.Size = New System.Drawing.Size(1056, 437)
@@ -741,6 +748,7 @@ Partial Class mainForm
         Me.Panel3.Controls.Add(Me.btn_next)
         Me.Panel3.Controls.Add(Me.btn_delete)
         Me.Panel3.Controls.Add(Me.btn_update)
+        Me.Panel3.Controls.Add(Me.btn_cancel)
         Me.Panel3.Controls.Add(Me.btn_save)
         Me.Panel3.Controls.Add(Me.btn_add)
         Me.Panel3.Controls.Add(Me.btn_prev)
@@ -781,7 +789,7 @@ Partial Class mainForm
         '
         Me.btn_save.Location = New System.Drawing.Point(841, 39)
         Me.btn_save.Name = "btn_save"
-        Me.btn_save.Size = New System.Drawing.Size(212, 23)
+        Me.btn_save.Size = New System.Drawing.Size(98, 23)
         Me.btn_save.TabIndex = 1
         Me.btn_save.Text = "Save"
         Me.btn_save.UseVisualStyleBackColor = True
@@ -873,11 +881,14 @@ Partial Class mainForm
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
         '
-        'item_summary
+        'btn_cancel
         '
-        Me.item_summary.Name = "item_summary"
-        Me.item_summary.Size = New System.Drawing.Size(180, 22)
-        Me.item_summary.Text = "Сводная таблица"
+        Me.btn_cancel.Location = New System.Drawing.Point(955, 39)
+        Me.btn_cancel.Name = "btn_cancel"
+        Me.btn_cancel.Size = New System.Drawing.Size(98, 23)
+        Me.btn_cancel.TabIndex = 1
+        Me.btn_cancel.Text = "Cancel"
+        Me.btn_cancel.UseVisualStyleBackColor = True
         '
         'mainForm
         '
@@ -1010,4 +1021,5 @@ Partial Class mainForm
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents item_summary As ToolStripMenuItem
+    Friend WithEvents btn_cancel As Button
 End Class

@@ -246,9 +246,13 @@ Module myFunc
         mainForm.txt_qty3.Text = selectedRow.Cells(8).Value.ToString
 
         mainForm.dgv.Rows(index).Selected = True
-        sumForm.dgv_sum.ClearSelection()
-        sumForm.dgv_sum.Rows(index).Selected = True
-
+        '   Check is form running
+        For Each f As Form In Application.OpenForms
+            If f.Name = "sumForm" Then
+                sumForm.dgv_sum.ClearSelection()
+                sumForm.dgv_sum.Rows(index).Selected = True
+            End If
+        Next f
     End Sub
 #Region "next/prev buttons"
     '===================================================================================
@@ -263,7 +267,6 @@ Module myFunc
         index = mainForm.dgv.CurrentRow.Index
 
         mainForm.dgv.ClearSelection()
-        sumForm.dgv_sum.ClearSelection()
 
         mainForm.dgv.CurrentCell = mainForm.dgv.Item(0, index)
         mainForm.dgv.Rows(index).Selected = True
@@ -278,7 +281,13 @@ Module myFunc
         index = index - 1
         mainForm.dgv.CurrentCell = mainForm.dgv.Item(0, index)
         mainForm.dgv.Rows(index).Selected = True
-        sumForm.dgv_sum.Rows(index).Selected = True
+        '   Check is form running
+        For Each f As Form In Application.OpenForms
+            If f.Name = "sumForm" Then
+                sumForm.dgv_sum.ClearSelection()
+                sumForm.dgv_sum.Rows(index).Selected = True
+            End If
+        Next f
 
         selectedRow = mainForm.dgv.Rows(index)
 
@@ -306,7 +315,7 @@ Module myFunc
         index = mainForm.dgv.CurrentRow.Index
 
         mainForm.dgv.ClearSelection()
-        sumForm.dgv_sum.ClearSelection()
+
 
         mainForm.dgv.CurrentCell = mainForm.dgv.Item(0, index)
         mainForm.dgv.Rows(index).Selected = True
@@ -320,7 +329,13 @@ Module myFunc
         index = index + 1
         mainForm.dgv.CurrentCell = mainForm.dgv.Item(0, index)
         mainForm.dgv.Rows(index).Selected = True
-        sumForm.dgv_sum.Rows(index).Selected = True
+        '   Check is form running
+        For Each f As Form In Application.OpenForms
+            If f.Name = "sumForm" Then
+                sumForm.dgv_sum.ClearSelection()
+                sumForm.dgv_sum.Rows(index).Selected = True
+            End If
+        Next f
 
         selectedRow = mainForm.dgv.Rows(index)
 
@@ -393,6 +408,52 @@ Module myFunc
         If mainForm.txt_qty3.Text = "" Then
             mainForm.txt_qty3.Text = 0
         End If
+    End Sub
+
+    '===================================================================================
+    '             === UPDATE data in DB ===
+    '===================================================================================
+    Sub updateData()
+
+        Dim row As DataRow
+        Dim dt As DataTable
+        dt = mainForm.dts.Tables(mainForm.iCompany)
+        Dim index As Integer = mainForm.dgv.CurrentRow.Index
+        row = dt.Rows(index)
+
+        Dim sRow() As String
+
+        sRow = New String() {
+                mainForm.rtb_fixtureName.Text,
+                mainForm.txt_qty.Text,
+                mainForm.rtb_FirstName.Text,
+                mainForm.txt_qty1.Text,
+                mainForm.rtb_SecondName.Text,
+                mainForm.txt_qty2.Text,
+                mainForm.rtb_ThirdName.Text,
+                mainForm.txt_qty3.Text
+            }
+        '   Chek null values in textboxes
+
+        For i As Integer = 1 To sRow.Count - 1 Step 2
+            If sRow(i) = "" Then
+                MsgBox("Поле количества приборов не может быть пустым!")
+                mainForm.btn_save.Enabled = False
+                Exit Sub
+            End If
+        Next i
+
+        For i As Integer = 1 To mainForm.dts.Tables.Count
+
+            For j As Integer = 1 To mainForm.dts.Tables(1).Columns.Count - 1
+                row.Item(j) = sRow(j - 1)
+            Next j
+        Next i
+
+        mainForm.dgv.DataSource = mainForm.dts.Tables(mainForm.iCompany)
+
+        ' update_sumDatatable(_index)
+
     End Sub
 
 End Module

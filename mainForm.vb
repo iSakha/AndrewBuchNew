@@ -307,6 +307,24 @@ Public Class mainForm
         Next i
 
     End Sub
+
+    Private Sub btn_add_Click(sender As Object, e As EventArgs) Handles btn_add.Click
+
+    End Sub
+
+    Private Sub btn_update_Click(sender As Object, e As EventArgs) Handles btn_update.Click
+        updateData()
+        calcQuantity()
+    End Sub
+
+    Private Sub btn_delete_Click(sender As Object, e As EventArgs) Handles btn_delete.Click
+
+    End Sub
+
+    Private Sub btn_save_Click(sender As Object, e As EventArgs) Handles btn_save.Click, btn_cancel.Click
+
+    End Sub
+
     Sub format_sumDGV()
 
         Dim col() As Color
@@ -381,11 +399,14 @@ Public Class mainForm
         '-----------------------------------------------------------------------------------------
         'dgv_result.Item(6, 0).Style.BackColor = Color.Red
         '-----------------------------------------------------------------------------------------
-        sumForm.Show()
-        create_dataset()
+        'sumForm.Show()
+        'create_dataset()
 
-        sumForm.dgv_sum.DataSource = dts.Tables(0)
-
+        'sumForm.dgv_sum.DataSource = dts.Tables(0)
+        '-----------------------------------------------------------------------------------------
+        For Each f As Form In Application.OpenForms
+            Console.WriteLine(f.Name)
+        Next
     End Sub
 
 End Class
