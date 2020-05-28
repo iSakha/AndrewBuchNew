@@ -24,6 +24,9 @@ Public Class mainForm
     Public sCompany() As String = {"belimlight", "PRLighting", "blackout", "vision", "stage"}
     Private Sub FolderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FolderToolStripMenuItem.Click
 
+        iDepartment = 0
+        iCategory = 0
+        iCompany = 1
         loadDataBaseFolder()
 
     End Sub
@@ -188,7 +191,7 @@ Public Class mainForm
         create_dataset()
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(252, 228, 214)
-        dgv.DataSource = dts.Tables(0)
+        dgv.DataSource = dts.Tables(iCompany)
         format_dgv_dataset(c)
 
     End Sub
@@ -198,7 +201,7 @@ Public Class mainForm
         create_dataset()
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(221, 235, 247)
-        dgv.DataSource = dts.Tables(1)
+        dgv.DataSource = dts.Tables(iCompany)
         format_dgv_dataset(c)
     End Sub
 
@@ -207,7 +210,7 @@ Public Class mainForm
         create_dataset()
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(237, 237, 237)
-        dgv.DataSource = dts.Tables(2)
+        dgv.DataSource = dts.Tables(iCompany)
         format_dgv_dataset(c)
     End Sub
 
@@ -216,7 +219,7 @@ Public Class mainForm
         create_dataset()
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(226, 239, 218)
-        dgv.DataSource = dts.Tables(3)
+        dgv.DataSource = dts.Tables(iCompany)
         format_dgv_dataset(c)
     End Sub
 
@@ -225,7 +228,7 @@ Public Class mainForm
         create_dataset()
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(237, 226, 246)
-        dgv.DataSource = dts.Tables(4)
+        dgv.DataSource = dts.Tables(iCompany)
         format_dgv_dataset(c)
     End Sub
 #End Region
@@ -262,10 +265,18 @@ Public Class mainForm
     Private Sub dgv_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv.CellClick
         dgv_clickCell(sender, e)
         calcQuantity()
+
     End Sub
 
     Private Sub item_summary_Click(sender As Object, e As EventArgs) Handles item_summary.Click
-
+        iCompany = 0
+        sumForm.Show()
+        create_dataset()
+        sumForm.dgv_sum.DataSource = dts.Tables(0)
+        sumForm.dgv_sum.Columns(8).Visible = False
+        sumForm.dgv_sum.Columns(9).Visible = False
+        sumForm.dgv_sum.Columns(10).Visible = False
+        format_sumDGV()
     End Sub
 
     '===================================================================================      
@@ -294,6 +305,57 @@ Public Class mainForm
             dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250)
 
         Next i
+
+    End Sub
+    Sub format_sumDGV()
+
+        Dim col() As Color
+
+        col = {Color.FromArgb(252, 228, 214), Color.FromArgb(221, 235, 247), Color.FromArgb(237, 237, 237),
+            Color.FromArgb(226, 239, 218), Color.FromArgb(237, 226, 246)}
+
+        sumForm.dgv_sum.Columns(0).Width = 55                ' #
+        sumForm.dgv_sum.Columns(1).Width = 230               ' Fixture
+        sumForm.dgv_sum.Columns(2).Width = 65                ' Q-ty
+        sumForm.dgv_sum.Columns(2).DefaultCellStyle.Font = New Font("Tahoma", 10)
+        sumForm.dgv_sum.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(3).Width = 62                ' BelImlight
+        sumForm.dgv_sum.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(4).Width = 62                ' PRLightigTouring
+        sumForm.dgv_sum.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(5).Width = 62                ' BlackOut
+        sumForm.dgv_sum.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(6).Width = 62                ' Vision
+        sumForm.dgv_sum.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(7).Width = 62                ' Stage
+        sumForm.dgv_sum.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        sumForm.dgv_sum.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(11).Width = 65
+        sumForm.dgv_sum.Columns(11).DefaultCellStyle.Font = New Font("Tahoma", 10)
+
+        sumForm.dgv_sum.Columns(3).DefaultCellStyle.BackColor = col(0)
+        sumForm.dgv_sum.Columns(4).DefaultCellStyle.BackColor = col(1)
+        sumForm.dgv_sum.Columns(5).DefaultCellStyle.BackColor = col(2)
+        sumForm.dgv_sum.Columns(6).DefaultCellStyle.BackColor = col(3)
+        sumForm.dgv_sum.Columns(7).DefaultCellStyle.BackColor = col(4)
+
+        For i = 0 To sumForm.dgv_sum.Rows.Count - 2
+
+            sumForm.dgv_sum.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250)
+            If sumForm.dgv_sum.Item(11, i).Value = 0 Then
+                sumForm.dgv_sum.Item(0, i).Style.BackColor = Color.LightGreen
+                sumForm.dgv_sum.Item(1, i).Style.BackColor = Color.LightGreen
+                sumForm.dgv_sum.Item(2, i).Style.BackColor = Color.LightGreen
+                sumForm.dgv_sum.Item(11, i).Style.BackColor = Color.LightGreen
+            Else
+                sumForm.dgv_sum.Item(0, i).Style.BackColor = Color.LightPink
+                sumForm.dgv_sum.Item(1, i).Style.BackColor = Color.LightPink
+                sumForm.dgv_sum.Item(2, i).Style.BackColor = Color.LightPink
+                sumForm.dgv_sum.Item(11, i).Style.BackColor = Color.LightPink
+            End If
+        Next i
+
     End Sub
     '===================================================================================      
     '                === Test button ===
@@ -320,6 +382,10 @@ Public Class mainForm
         'dgv_result.Item(6, 0).Style.BackColor = Color.Red
         '-----------------------------------------------------------------------------------------
         sumForm.Show()
+        create_dataset()
+
+        sumForm.dgv_sum.DataSource = dts.Tables(0)
+
     End Sub
 
 End Class

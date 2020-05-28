@@ -107,9 +107,9 @@ Module myFunc
 
         ws = mainForm.i_pivot_wsDict(mainForm.iDepartment)(mainForm.iCategory)
 
-        For k As Integer = 1 To ws.Tables.Count - 1
+        For k As Integer = 0 To ws.Tables.Count - 1
 
-            dt = New DataTable
+
 
             xlTable = ws.Tables(k)
             c_xlTable = xlTable.Address.Columns
@@ -118,51 +118,109 @@ Module myFunc
             adr = xlTable.Address.Address
             rng = ws.Cells(adr)
 
-            'Adding the Columns
-            For i = 0 To c_xlTable - 1
-                dt.Columns.Add(rng.Value(0, i))
-            Next i
+            Select Case k
 
-            dt.TableName = xlTable.Name
+                Case = 0
 
-            dt.Columns(0).DataType = System.Type.GetType("System.Int32")
-            dt.Columns(1).DataType = System.Type.GetType("System.String")
-            dt.Columns(2).DataType = System.Type.GetType("System.Int32")
-            dt.Columns(3).DataType = System.Type.GetType("System.String")
-            dt.Columns(4).DataType = System.Type.GetType("System.Int32")
-            dt.Columns(5).DataType = System.Type.GetType("System.String")
-            dt.Columns(6).DataType = System.Type.GetType("System.Int32")
-            dt.Columns(7).DataType = System.Type.GetType("System.String")
-            dt.Columns(8).DataType = System.Type.GetType("System.Int32")
+                    dt = New DataTable
+                    dt.TableName = xlTable.Name
 
-            'Add Rows from Excel table
+                    'Adding the Columns
+                    For i = 0 To c_xlTable - 1
+                        dt.Columns.Add(rng.Value(0, i))
+                    Next i
 
-            For i = 1 To r_xlTable - 1
-                row = dt.Rows.Add()
+                    dt.Columns(0).DataType = System.Type.GetType("System.Int32")               ' #
+                    dt.Columns(1).DataType = System.Type.GetType("System.String")              ' Fixture
+                    dt.Columns(2).DataType = System.Type.GetType("System.Int32")               ' Q-ty
+                    dt.Columns(3).DataType = System.Type.GetType("System.Int32")               ' BelImlight
+                    dt.Columns(4).DataType = System.Type.GetType("System.Int32")               ' PRLightigTouring
+                    dt.Columns(5).DataType = System.Type.GetType("System.Int32")               ' BlackOut
+                    dt.Columns(6).DataType = System.Type.GetType("System.Int32")               ' Vision
+                    dt.Columns(7).DataType = System.Type.GetType("System.Int32")               ' Stage
+                    dt.Columns(8).DataType = System.Type.GetType("System.Int32")               ' Weight
+                    dt.Columns(9).DataType = System.Type.GetType("System.Int32")               ' Power
+                    dt.Columns(10).DataType = System.Type.GetType("System.Int32")              ' Price
+                    dt.Columns.Add()
+                    dt.Columns(11).DataType = System.Type.GetType("System.Int32")              ' Result
+                    dt.Columns(11).ColumnName = "Result"
 
-                For j = 0 To c_xlTable - 1
 
-                    If rng.Value(i, j) = Nothing Then
-                        Select Case j
-                            Case 3
-                                row.Item(j) = ""
-                            Case 4
-                                row.Item(j) = 0
-                            Case 5
-                                row.Item(j) = ""
-                            Case 6
-                                row.Item(j) = 0
-                            Case 7
-                                row.Item(j) = ""
-                            Case 8
-                                row.Item(j) = 0
-                        End Select
-                    Else
-                        row.Item(j) = rng.Value(i, j)
-                    End If
+                    For i = 1 To r_xlTable - 1
 
-                Next j
-            Next i
+                        row = dt.Rows.Add()
+
+                        For j = 0 To c_xlTable - 2
+
+                            row.Item(j) = rng.Value(i, j)
+
+                        Next j
+
+                        Dim val, val_bel, val_pr, val_black, val_vis, val_st As Integer
+
+                        val = row.Item(2)
+                        val_bel = row.Item(3)
+                        val_pr = row.Item(4)
+                        val_black = row.Item(5)
+                        val_vis = row.Item(6)
+                        val_st = row.Item(7)
+
+                        row.Item(c_xlTable) = val - (val_bel + val_pr + val_black + val_vis + val_st)
+
+                    Next i
+
+                Case > 0
+
+                    dt = New DataTable
+                    dt.TableName = xlTable.Name
+
+                    'Adding the Columns
+                    For i = 0 To c_xlTable - 1
+                        dt.Columns.Add(rng.Value(0, i))
+                    Next i
+
+                    dt.Columns(0).DataType = System.Type.GetType("System.Int32")
+                    dt.Columns(1).DataType = System.Type.GetType("System.String")
+                    dt.Columns(2).DataType = System.Type.GetType("System.Int32")
+                    dt.Columns(3).DataType = System.Type.GetType("System.String")
+                    dt.Columns(4).DataType = System.Type.GetType("System.Int32")
+                    dt.Columns(5).DataType = System.Type.GetType("System.String")
+                    dt.Columns(6).DataType = System.Type.GetType("System.Int32")
+                    dt.Columns(7).DataType = System.Type.GetType("System.String")
+                    dt.Columns(8).DataType = System.Type.GetType("System.Int32")
+
+
+                    'Add Rows from Excel table
+
+                    For i = 1 To r_xlTable - 1
+                        row = dt.Rows.Add()
+
+                        For j = 0 To c_xlTable - 1
+
+                            If rng.Value(i, j) = Nothing Then
+                                Select Case j
+                                    Case 3
+                                        row.Item(j) = ""
+                                    Case 4
+                                        row.Item(j) = 0
+                                    Case 5
+                                        row.Item(j) = ""
+                                    Case 6
+                                        row.Item(j) = 0
+                                    Case 7
+                                        row.Item(j) = ""
+                                    Case 8
+                                        row.Item(j) = 0
+                                End Select
+                            Else
+                                row.Item(j) = rng.Value(i, j)
+                            End If
+
+                        Next j
+                    Next i
+
+            End Select
+
             mainForm.dts.Tables.Add(dt)
         Next k
     End Sub
