@@ -212,6 +212,54 @@ Public Class mainForm
     End Sub
 #End Region
 
+#Region "Select Truss and motors"
+    Private Sub item_truss30x30_Click(sender As Object, e As EventArgs) Handles item_truss30x30.Click
+
+    End Sub
+
+    Private Sub item_truss40x40_Click(sender As Object, e As EventArgs) Handles item_truss40x40.Click
+        iDepartment = 3
+        iCategory = 0
+        writeToLabel("Trusses and motors", sender)
+    End Sub
+
+    Private Sub item_truss50x60_Click(sender As Object, e As EventArgs) Handles item_truss50x60.Click
+        iDepartment = 3
+        iCategory = 1
+        writeToLabel("Trusses and motors", sender)
+    End Sub
+
+    Private Sub item_motors_Click(sender As Object, e As EventArgs) Handles item_motors.Click
+        iDepartment = 3
+        iCategory = 2
+        writeToLabel("Trusses and motors", sender)
+    End Sub
+
+    Private Sub item_rigging_Click(sender As Object, e As EventArgs) Handles item_rigging.Click
+        iDepartment = 3
+        iCategory = 3
+        writeToLabel("Trusses and motors", sender)
+    End Sub
+
+    Private Sub item_diff_Click(sender As Object, e As EventArgs) Handles item_diff.Click
+        iDepartment = 3
+        iCategory = 4
+        writeToLabel("Trusses and motors", sender)
+    End Sub
+
+    Private Sub item_completeConstr_Click(sender As Object, e As EventArgs) Handles item_completeConstr.Click
+        iDepartment = 3
+        iCategory = 5
+        writeToLabel("Trusses and motors", sender)
+    End Sub
+
+    Private Sub item_stagelifts_Click(sender As Object, e As EventArgs) Handles item_stagelifts.Click
+        iDepartment = 3
+        iCategory = 6
+        writeToLabel("Trusses and motors", sender)
+    End Sub
+#End Region
+
 #Region "select Company"
     Private Sub item_belimlight_Click(sender As Object, e As EventArgs) Handles item_belimlight.Click
 
@@ -260,6 +308,7 @@ Public Class mainForm
         format_dgv_dataset(c)
     End Sub
 #End Region
+
 
     Private Sub btn_prev_Click(sender As Object, e As EventArgs) Handles btn_prev.Click
         prevRecord()
@@ -352,7 +401,6 @@ Public Class mainForm
     Private Sub btn_save_Click(sender As Object, e As EventArgs) Handles btn_save.Click, btn_cancel.Click
 
     End Sub
-
 
 
     Sub format_sumDGV()
