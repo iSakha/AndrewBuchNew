@@ -135,6 +135,7 @@ Public Class mainForm
 
     End Sub
 #End Region
+
 #Region "select Screen categories"
     Private Sub item_modules_Click(sender As Object, e As EventArgs) Handles item_modules.Click
         iDepartment = 1
@@ -184,6 +185,33 @@ Public Class mainForm
         writeToLabel("Screen", sender)
     End Sub
 #End Region
+
+#Region "Select commutation"
+    Private Sub item_pwrdistr_Click(sender As Object, e As EventArgs) Handles item_pwrdistr.Click
+        iDepartment = 2
+        iCategory = 0
+        writeToLabel("Commutation", sender)
+    End Sub
+
+    Private Sub item_comm_Click(sender As Object, e As EventArgs) Handles item_comm.Click
+        iDepartment = 2
+        iCategory = 1
+        writeToLabel("Commutation", sender)
+    End Sub
+
+    Private Sub item_pwrcomm_Click(sender As Object, e As EventArgs) Handles item_pwrcomm.Click
+        iDepartment = 2
+        iCategory = 2
+        writeToLabel("Commutation", sender)
+    End Sub
+
+    Private Sub item_rest_Click(sender As Object, e As EventArgs) Handles item_rest.Click
+        iDepartment = 2
+        iCategory = 3
+        writeToLabel("Commutation", sender)
+    End Sub
+#End Region
+
 #Region "select Company"
     Private Sub item_belimlight_Click(sender As Object, e As EventArgs) Handles item_belimlight.Click
 
@@ -324,6 +352,8 @@ Public Class mainForm
     Private Sub btn_save_Click(sender As Object, e As EventArgs) Handles btn_save.Click, btn_cancel.Click
 
     End Sub
+
+
 
     Sub format_sumDGV()
 

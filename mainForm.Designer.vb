@@ -23,13 +23,13 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -82,6 +82,10 @@ Partial Class mainForm
         Me.item_lightDesks = New System.Windows.Forms.ToolStripMenuItem()
         Me.item_cameras = New System.Windows.Forms.ToolStripMenuItem()
         Me.item_commutation = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_pwrdistr = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_comm = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_pwrcomm = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_rest = New System.Windows.Forms.ToolStripMenuItem()
         Me.item_truss = New System.Windows.Forms.ToolStripMenuItem()
         Me.item_construction = New System.Windows.Forms.ToolStripMenuItem()
         Me.item_sound = New System.Windows.Forms.ToolStripMenuItem()
@@ -118,6 +122,7 @@ Partial Class mainForm
         Me.btn_next = New System.Windows.Forms.Button()
         Me.btn_delete = New System.Windows.Forms.Button()
         Me.btn_update = New System.Windows.Forms.Button()
+        Me.btn_cancel = New System.Windows.Forms.Button()
         Me.btn_save = New System.Windows.Forms.Button()
         Me.btn_add = New System.Windows.Forms.Button()
         Me.btn_prev = New System.Windows.Forms.Button()
@@ -129,7 +134,6 @@ Partial Class mainForm
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btn_cancel = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -371,7 +375,7 @@ Partial Class mainForm
         '
         Me.item_lighting.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.item_movHeads, Me.item_strobes, Me.item_blinders, Me.item_arch, Me.item_LED, Me.item_smoke, Me.item_consoles, Me.item_intercom})
         Me.item_lighting.Name = "item_lighting"
-        Me.item_lighting.Size = New System.Drawing.Size(175, 22)
+        Me.item_lighting.Size = New System.Drawing.Size(180, 22)
         Me.item_lighting.Text = "Lighting"
         '
         'item_movHeads
@@ -426,7 +430,7 @@ Partial Class mainForm
         '
         Me.item_screen.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.item_modules, Me.item_servers, Me.item_controllers1, Me.item_controllers2, Me.item_projectors, Me.item_scr_construction, Me.item_lightDesks, Me.item_cameras})
         Me.item_screen.Name = "item_screen"
-        Me.item_screen.Size = New System.Drawing.Size(175, 22)
+        Me.item_screen.Size = New System.Drawing.Size(180, 22)
         Me.item_screen.Text = "Screen"
         '
         'item_modules
@@ -479,26 +483,51 @@ Partial Class mainForm
         '
         'item_commutation
         '
+        Me.item_commutation.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.item_pwrdistr, Me.item_comm, Me.item_pwrcomm, Me.item_rest})
         Me.item_commutation.Name = "item_commutation"
-        Me.item_commutation.Size = New System.Drawing.Size(175, 22)
+        Me.item_commutation.Size = New System.Drawing.Size(180, 22)
         Me.item_commutation.Text = "Commutation"
+        '
+        'item_pwrdistr
+        '
+        Me.item_pwrdistr.Name = "item_pwrdistr"
+        Me.item_pwrdistr.Size = New System.Drawing.Size(224, 22)
+        Me.item_pwrdistr.Text = "&Power distribution, dimmers"
+        '
+        'item_comm
+        '
+        Me.item_comm.Name = "item_comm"
+        Me.item_comm.Size = New System.Drawing.Size(224, 22)
+        Me.item_comm.Text = "&Commutation"
+        '
+        'item_pwrcomm
+        '
+        Me.item_pwrcomm.Name = "item_pwrcomm"
+        Me.item_pwrcomm.Size = New System.Drawing.Size(224, 22)
+        Me.item_pwrcomm.Text = "&Power commutation"
+        '
+        'item_rest
+        '
+        Me.item_rest.Name = "item_rest"
+        Me.item_rest.Size = New System.Drawing.Size(224, 22)
+        Me.item_rest.Text = "&Rest equipment"
         '
         'item_truss
         '
         Me.item_truss.Name = "item_truss"
-        Me.item_truss.Size = New System.Drawing.Size(175, 22)
+        Me.item_truss.Size = New System.Drawing.Size(180, 22)
         Me.item_truss.Text = "Trusses and motors"
         '
         'item_construction
         '
         Me.item_construction.Name = "item_construction"
-        Me.item_construction.Size = New System.Drawing.Size(175, 22)
+        Me.item_construction.Size = New System.Drawing.Size(180, 22)
         Me.item_construction.Text = "Construction"
         '
         'item_sound
         '
         Me.item_sound.Name = "item_sound"
-        Me.item_sound.Size = New System.Drawing.Size(175, 22)
+        Me.item_sound.Size = New System.Drawing.Size(180, 22)
         Me.item_sound.Text = "Sound"
         '
         'menuItem_company
@@ -785,6 +814,15 @@ Partial Class mainForm
         Me.btn_update.Text = "Update"
         Me.btn_update.UseVisualStyleBackColor = True
         '
+        'btn_cancel
+        '
+        Me.btn_cancel.Location = New System.Drawing.Point(955, 39)
+        Me.btn_cancel.Name = "btn_cancel"
+        Me.btn_cancel.Size = New System.Drawing.Size(98, 23)
+        Me.btn_cancel.TabIndex = 1
+        Me.btn_cancel.Text = "Cancel"
+        Me.btn_cancel.UseVisualStyleBackColor = True
+        '
         'btn_save
         '
         Me.btn_save.Location = New System.Drawing.Point(841, 39)
@@ -825,70 +863,61 @@ Partial Class mainForm
         '
         'Column1
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle29.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle29
         Me.Column1.HeaderText = "Смета"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
         'Column2
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer))
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer))
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle30
         Me.Column2.HeaderText = "Belimlight"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
         '
         'Column3
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(221, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(247, Byte), Integer))
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle31.BackColor = System.Drawing.Color.FromArgb(CType(CType(221, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle31
         Me.Column3.HeaderText = "PRLighting"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
         '
         'Column4
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer))
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer))
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle32
         Me.Column4.HeaderText = "Blackout"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
         '
         'Column5
         '
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(218, Byte), Integer))
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle33.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(218, Byte), Integer))
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle33
         Me.Column5.HeaderText = "Multivision"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
         '
         'Column6
         '
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle34.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle34
         Me.Column6.HeaderText = "Stage"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
         '
         'Column7
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Column7.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle35.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Column7.DefaultCellStyle = DataGridViewCellStyle35
         Me.Column7.HeaderText = "Итого"
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
-        '
-        'btn_cancel
-        '
-        Me.btn_cancel.Location = New System.Drawing.Point(955, 39)
-        Me.btn_cancel.Name = "btn_cancel"
-        Me.btn_cancel.Size = New System.Drawing.Size(98, 23)
-        Me.btn_cancel.TabIndex = 1
-        Me.btn_cancel.Text = "Cancel"
-        Me.btn_cancel.UseVisualStyleBackColor = True
         '
         'mainForm
         '
@@ -1022,4 +1051,8 @@ Partial Class mainForm
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents item_summary As ToolStripMenuItem
     Friend WithEvents btn_cancel As Button
+    Friend WithEvents item_pwrdistr As ToolStripMenuItem
+    Friend WithEvents item_comm As ToolStripMenuItem
+    Friend WithEvents item_pwrcomm As ToolStripMenuItem
+    Friend WithEvents item_rest As ToolStripMenuItem
 End Class
