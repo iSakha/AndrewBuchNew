@@ -139,7 +139,12 @@ Module myFunc
                     dt.Columns(6).DataType = System.Type.GetType("System.Int32")               ' Vision
                     dt.Columns(7).DataType = System.Type.GetType("System.Int32")               ' Stage
                     dt.Columns(8).DataType = System.Type.GetType("System.Int32")               ' Weight
-                    dt.Columns(9).DataType = System.Type.GetType("System.Int32")               ' Power
+                    If mainForm.iDepartment = 3 Then
+                        dt.Columns(9).DataType = System.Type.GetType("System.String")          ' Power/length
+                    Else
+                        dt.Columns(9).DataType = System.Type.GetType("System.Int32")           ' Power/length
+                    End If
+
                     dt.Columns(10).DataType = System.Type.GetType("System.Int32")              ' Price
                     dt.Columns.Add()
                     dt.Columns(11).DataType = System.Type.GetType("System.Int32")              ' Result

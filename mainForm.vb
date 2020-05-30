@@ -8,6 +8,9 @@ Public Class mainForm
     Public sDir As String
     Public sFilePath As String
 
+    Dim currentDate As Date = Date.Now
+    Dim lastRunDate As Date = My.Settings.lastRun
+
     Public fileNames As Collection
 
     ' Dictionaries with Integer key
@@ -22,32 +25,51 @@ Public Class mainForm
     Public dts As DataSet
 
     Public sCompany() As String = {"belimlight", "PRLighting", "blackout", "vision", "stage"}
+
+
+    Private Sub mainForm_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        Dim daysStayed As Int32 = My.Settings.expireDate.Subtract(currentDate).Days
+
+        menuItem_department.Enabled = False
+        menuItem_company.Enabled = False
+
+        If lastRunDate.Subtract(currentDate).Days > 0 Then
+            MsgBox("Check date and time settings!")
+            Me.Close()
+        Else
+            My.Settings.lastRun = currentDate
+            My.Settings.Save()
+        End If
+
+        If daysStayed > 0 Then
+            Return
+        Else
+            MsgBox("This app has expired!")
+            Me.Close()
+        End If
+    End Sub
+#Region "Menu items"
     Private Sub FolderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FolderToolStripMenuItem.Click
 
         iDepartment = 0
         iCategory = 0
         iCompany = 1
         loadDataBaseFolder()
+        menuItem_department.Enabled = True
+        menuItem_company.Enabled = True
 
     End Sub
-
-
-    Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
-        'mainForm.btn_loadDB.PerformClick()
-        'createLightingDataset()
+    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+        Me.Close()
     End Sub
+
 #Region "select Lighting categories"
     Private Sub item_movHeads_Click(sender As Object, e As EventArgs) Handles item_movHeads.Click
 
         iDepartment = 0
         iCategory = 0
-        'If mainForm.lightDataset Is Nothing Then
-        '    createLightingDataset()
-        'End If
-
         writeToLabel("Lighting", sender)
-
-
 
     End Sub
 
@@ -55,10 +77,6 @@ Public Class mainForm
 
         iDepartment = 0
         iCategory = 1
-        'If mainForm.lightDataset Is Nothing Then
-        '    createLightingDataset()
-        'End If
-
         writeToLabel("Lighting", sender)
 
     End Sub
@@ -67,10 +85,6 @@ Public Class mainForm
 
         iDepartment = 0
         iCategory = 2
-        'If mainForm.lightDataset Is Nothing Then
-        '    createLightingDataset()
-        'End If
-
         writeToLabel("Lighting", sender)
 
     End Sub
@@ -79,10 +93,6 @@ Public Class mainForm
 
         iDepartment = 0
         iCategory = 3
-        'If mainForm.lightDataset Is Nothing Then
-        '    createLightingDataset()
-        'End If
-
         writeToLabel("Lighting", sender)
 
     End Sub
@@ -91,10 +101,6 @@ Public Class mainForm
 
         iDepartment = 0
         iCategory = 4
-        'If mainForm.lightDataset Is Nothing Then
-        '    createLightingDataset()
-        'End If
-
         writeToLabel("Lighting", sender)
 
     End Sub
@@ -103,10 +109,6 @@ Public Class mainForm
 
         iDepartment = 0
         iCategory = 5
-        'If mainForm.lightDataset Is Nothing Then
-        '    createLightingDataset()
-        'End If
-
         writeToLabel("Lighting", sender)
 
     End Sub
@@ -115,10 +117,6 @@ Public Class mainForm
 
         iDepartment = 0
         iCategory = 6
-        'If mainForm.lightDataset Is Nothing Then
-        '    createLightingDataset()
-        'End If
-
         writeToLabel("Lighting", sender)
 
     End Sub
@@ -127,10 +125,6 @@ Public Class mainForm
 
         iDepartment = 0
         iCategory = 7
-        'If mainForm.lightDataset Is Nothing Then
-        '    createLightingDataset()
-        'End If
-
         writeToLabel("Lighting", sender)
 
     End Sub
@@ -214,48 +208,50 @@ Public Class mainForm
 
 #Region "Select Truss and motors"
     Private Sub item_truss30x30_Click(sender As Object, e As EventArgs) Handles item_truss30x30.Click
-
-    End Sub
-
-    Private Sub item_truss40x40_Click(sender As Object, e As EventArgs) Handles item_truss40x40.Click
         iDepartment = 3
         iCategory = 0
         writeToLabel("Trusses and motors", sender)
     End Sub
 
-    Private Sub item_truss50x60_Click(sender As Object, e As EventArgs) Handles item_truss50x60.Click
+    Private Sub item_truss40x40_Click(sender As Object, e As EventArgs) Handles item_truss40x40.Click
         iDepartment = 3
         iCategory = 1
         writeToLabel("Trusses and motors", sender)
     End Sub
 
-    Private Sub item_motors_Click(sender As Object, e As EventArgs) Handles item_motors.Click
+    Private Sub item_truss50x60_Click(sender As Object, e As EventArgs) Handles item_truss50x60.Click
         iDepartment = 3
         iCategory = 2
         writeToLabel("Trusses and motors", sender)
     End Sub
 
-    Private Sub item_rigging_Click(sender As Object, e As EventArgs) Handles item_rigging.Click
+    Private Sub item_motors_Click(sender As Object, e As EventArgs) Handles item_motors.Click
         iDepartment = 3
         iCategory = 3
         writeToLabel("Trusses and motors", sender)
     End Sub
 
-    Private Sub item_diff_Click(sender As Object, e As EventArgs) Handles item_diff.Click
+    Private Sub item_rigging_Click(sender As Object, e As EventArgs) Handles item_rigging.Click
         iDepartment = 3
         iCategory = 4
         writeToLabel("Trusses and motors", sender)
     End Sub
 
-    Private Sub item_completeConstr_Click(sender As Object, e As EventArgs) Handles item_completeConstr.Click
+    Private Sub item_diff_Click(sender As Object, e As EventArgs) Handles item_diff.Click
         iDepartment = 3
         iCategory = 5
         writeToLabel("Trusses and motors", sender)
     End Sub
 
-    Private Sub item_stagelifts_Click(sender As Object, e As EventArgs) Handles item_stagelifts.Click
+    Private Sub item_completeConstr_Click(sender As Object, e As EventArgs) Handles item_completeConstr.Click
         iDepartment = 3
         iCategory = 6
+        writeToLabel("Trusses and motors", sender)
+    End Sub
+
+    Private Sub item_stagelifts_Click(sender As Object, e As EventArgs) Handles item_stagelifts.Click
+        iDepartment = 3
+        iCategory = 7
         writeToLabel("Trusses and motors", sender)
     End Sub
 #End Region
@@ -269,6 +265,13 @@ Public Class mainForm
         Dim c As Color = Color.FromArgb(252, 228, 214)
         dgv.DataSource = dts.Tables(iCompany)
         format_dgv_dataset(c)
+        '   Check is form running
+        For Each f As Form In Application.OpenForms
+            If f.Name = "sumForm" Then
+                sumForm.dgv_sum.DataSource = dts.Tables(0)
+                format_sumDGV()
+            End If
+        Next f
 
     End Sub
 
@@ -279,6 +282,14 @@ Public Class mainForm
         Dim c As Color = Color.FromArgb(221, 235, 247)
         dgv.DataSource = dts.Tables(iCompany)
         format_dgv_dataset(c)
+        '   Check is form running
+        For Each f As Form In Application.OpenForms
+            If f.Name = "sumForm" Then
+                sumForm.dgv_sum.DataSource = dts.Tables(0)
+                format_sumDGV()
+            End If
+        Next f
+
     End Sub
 
     Private Sub item_blackout_Click(sender As Object, e As EventArgs) Handles item_blackout.Click
@@ -288,6 +299,14 @@ Public Class mainForm
         Dim c As Color = Color.FromArgb(237, 237, 237)
         dgv.DataSource = dts.Tables(iCompany)
         format_dgv_dataset(c)
+        '   Check is form running
+        For Each f As Form In Application.OpenForms
+            If f.Name = "sumForm" Then
+                sumForm.dgv_sum.DataSource = dts.Tables(0)
+                format_sumDGV()
+            End If
+        Next f
+
     End Sub
 
     Private Sub item_vision_Click(sender As Object, e As EventArgs) Handles item_vision.Click
@@ -297,6 +316,14 @@ Public Class mainForm
         Dim c As Color = Color.FromArgb(226, 239, 218)
         dgv.DataSource = dts.Tables(iCompany)
         format_dgv_dataset(c)
+        '   Check is form running
+        For Each f As Form In Application.OpenForms
+            If f.Name = "sumForm" Then
+                sumForm.dgv_sum.DataSource = dts.Tables(0)
+                format_sumDGV()
+            End If
+        Next f
+
     End Sub
 
     Private Sub item_stage_Click(sender As Object, e As EventArgs) Handles item_stage.Click
@@ -306,9 +333,29 @@ Public Class mainForm
         Dim c As Color = Color.FromArgb(237, 226, 246)
         dgv.DataSource = dts.Tables(iCompany)
         format_dgv_dataset(c)
+        '   Check is form running
+        For Each f As Form In Application.OpenForms
+            If f.Name = "sumForm" Then
+                sumForm.dgv_sum.DataSource = dts.Tables(0)
+                format_sumDGV()
+            End If
+        Next f
+
     End Sub
+    Private Sub item_summary_Click(sender As Object, e As EventArgs) Handles item_summary.Click
+        iCompany = 0
+        sumForm.Show()
+        create_dataset()
+        sumForm.dgv_sum.DataSource = dts.Tables(0)
+        sumForm.dgv_sum.Columns(8).Visible = False
+        sumForm.dgv_sum.Columns(9).Visible = False
+        sumForm.dgv_sum.Columns(10).Visible = False
+        format_sumDGV()
+    End Sub
+
 #End Region
 
+#End Region
 
     Private Sub btn_prev_Click(sender As Object, e As EventArgs) Handles btn_prev.Click
         prevRecord()
@@ -330,6 +377,7 @@ Public Class mainForm
         Me.lbl_dpartmentValue.Text = _department
         Me.lbl_subsectionValue.Text = _sender.text
         Me.dgv.DataSource = Nothing
+        sumForm.dgv_sum.DataSource = Nothing
     End Sub
 
 
@@ -345,16 +393,7 @@ Public Class mainForm
 
     End Sub
 
-    Private Sub item_summary_Click(sender As Object, e As EventArgs) Handles item_summary.Click
-        iCompany = 0
-        sumForm.Show()
-        create_dataset()
-        sumForm.dgv_sum.DataSource = dts.Tables(0)
-        sumForm.dgv_sum.Columns(8).Visible = False
-        sumForm.dgv_sum.Columns(9).Visible = False
-        sumForm.dgv_sum.Columns(10).Visible = False
-        format_sumDGV()
-    End Sub
+
 
     '===================================================================================      
     '                === Format DataGridView ===
@@ -402,7 +441,6 @@ Public Class mainForm
 
     End Sub
 
-
     Sub format_sumDGV()
 
         Dim col() As Color
@@ -428,7 +466,7 @@ Public Class mainForm
 
         sumForm.dgv_sum.Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         sumForm.dgv_sum.Columns(11).Width = 65
-        sumForm.dgv_sum.Columns(11).DefaultCellStyle.Font = New Font("Tahoma", 10)
+        sumForm.dgv_sum.Columns(11).DefaultCellStyle.Font = New Font("Tahoma", 10, FontStyle.Bold)
 
         sumForm.dgv_sum.Columns(3).DefaultCellStyle.BackColor = col(0)
         sumForm.dgv_sum.Columns(4).DefaultCellStyle.BackColor = col(1)
@@ -451,6 +489,10 @@ Public Class mainForm
                 sumForm.dgv_sum.Item(11, i).Style.BackColor = Color.LightPink
             End If
         Next i
+
+        sumForm.dgv_sum.Columns(8).Visible = False
+        sumForm.dgv_sum.Columns(9).Visible = False
+        sumForm.dgv_sum.Columns(10).Visible = False
 
     End Sub
     '===================================================================================      
@@ -482,9 +524,12 @@ Public Class mainForm
 
         'sumForm.dgv_sum.DataSource = dts.Tables(0)
         '-----------------------------------------------------------------------------------------
-        For Each f As Form In Application.OpenForms
-            Console.WriteLine(f.Name)
-        Next
+
+        'sumForm.dgv_sum.Columns(0).Visible = False
+
+        '-----------------------------------------------------------------------------------------
+
     End Sub
+
 
 End Class

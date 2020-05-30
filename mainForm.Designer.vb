@@ -23,13 +23,13 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
-        Dim DataGridViewCellStyle57 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle58 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle59 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle60 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle61 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle62 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle63 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -87,6 +87,14 @@ Partial Class mainForm
         Me.item_pwrcomm = New System.Windows.Forms.ToolStripMenuItem()
         Me.item_rest = New System.Windows.Forms.ToolStripMenuItem()
         Me.item_truss_and_motors = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_truss30x30 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_truss40x40 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_truss50x60 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_motors = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_rigging = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_diff = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_completeConstr = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_stagelifts = New System.Windows.Forms.ToolStripMenuItem()
         Me.item_construction = New System.Windows.Forms.ToolStripMenuItem()
         Me.item_sound = New System.Windows.Forms.ToolStripMenuItem()
         Me.menuItem_company = New System.Windows.Forms.ToolStripMenuItem()
@@ -134,14 +142,6 @@ Partial Class mainForm
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.item_truss30x30 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.item_truss40x40 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.item_truss50x60 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.item_motors = New System.Windows.Forms.ToolStripMenuItem()
-        Me.item_rigging = New System.Windows.Forms.ToolStripMenuItem()
-        Me.item_diff = New System.Windows.Forms.ToolStripMenuItem()
-        Me.item_completeConstr = New System.Windows.Forms.ToolStripMenuItem()
-        Me.item_stagelifts = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -175,7 +175,7 @@ Partial Class mainForm
         Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.NewToolStripMenuItem.Text = "&New"
         '
         'OpenToolStripMenuItem
@@ -185,25 +185,26 @@ Partial Class mainForm
         Me.OpenToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.OpenToolStripMenuItem.Text = "&Open"
         '
         'FileToolStripMenuItem1
         '
+        Me.FileToolStripMenuItem1.Enabled = False
         Me.FileToolStripMenuItem1.Name = "FileToolStripMenuItem1"
-        Me.FileToolStripMenuItem1.Size = New System.Drawing.Size(107, 22)
+        Me.FileToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
         Me.FileToolStripMenuItem1.Text = "&File"
         '
         'FolderToolStripMenuItem
         '
         Me.FolderToolStripMenuItem.Name = "FolderToolStripMenuItem"
-        Me.FolderToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
+        Me.FolderToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.FolderToolStripMenuItem.Text = "Folder"
         '
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
-        Me.toolStripSeparator.Size = New System.Drawing.Size(143, 6)
+        Me.toolStripSeparator.Size = New System.Drawing.Size(177, 6)
         '
         'SaveToolStripMenuItem
         '
@@ -211,19 +212,19 @@ Partial Class mainForm
         Me.SaveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         Me.SaveToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SaveToolStripMenuItem.Text = "&Save"
         '
         'SaveAsToolStripMenuItem
         '
         Me.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem"
-        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SaveAsToolStripMenuItem.Text = "Save &As"
         '
         'toolStripSeparator1
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
-        Me.toolStripSeparator1.Size = New System.Drawing.Size(143, 6)
+        Me.toolStripSeparator1.Size = New System.Drawing.Size(177, 6)
         '
         'PrintToolStripMenuItem
         '
@@ -231,7 +232,7 @@ Partial Class mainForm
         Me.PrintToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem"
         Me.PrintToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.PrintToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PrintToolStripMenuItem.Text = "&Print"
         '
         'PrintPreviewToolStripMenuItem
@@ -239,18 +240,18 @@ Partial Class mainForm
         Me.PrintPreviewToolStripMenuItem.Image = CType(resources.GetObject("PrintPreviewToolStripMenuItem.Image"), System.Drawing.Image)
         Me.PrintPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.PrintPreviewToolStripMenuItem.Name = "PrintPreviewToolStripMenuItem"
-        Me.PrintPreviewToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.PrintPreviewToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PrintPreviewToolStripMenuItem.Text = "Print Pre&view"
         '
         'toolStripSeparator2
         '
         Me.toolStripSeparator2.Name = "toolStripSeparator2"
-        Me.toolStripSeparator2.Size = New System.Drawing.Size(143, 6)
+        Me.toolStripSeparator2.Size = New System.Drawing.Size(177, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ExitToolStripMenuItem.Text = "E&xit"
         '
         'EditToolStripMenuItem
@@ -383,7 +384,7 @@ Partial Class mainForm
         '
         Me.item_lighting.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.item_movHeads, Me.item_strobes, Me.item_blinders, Me.item_arch, Me.item_LED, Me.item_smoke, Me.item_consoles, Me.item_intercom})
         Me.item_lighting.Name = "item_lighting"
-        Me.item_lighting.Size = New System.Drawing.Size(180, 22)
+        Me.item_lighting.Size = New System.Drawing.Size(175, 22)
         Me.item_lighting.Text = "Lighting"
         '
         'item_movHeads
@@ -438,7 +439,7 @@ Partial Class mainForm
         '
         Me.item_screen.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.item_modules, Me.item_servers, Me.item_controllers1, Me.item_controllers2, Me.item_projectors, Me.item_scr_construction, Me.item_lightDesks, Me.item_cameras})
         Me.item_screen.Name = "item_screen"
-        Me.item_screen.Size = New System.Drawing.Size(180, 22)
+        Me.item_screen.Size = New System.Drawing.Size(175, 22)
         Me.item_screen.Text = "Screen"
         '
         'item_modules
@@ -493,7 +494,7 @@ Partial Class mainForm
         '
         Me.item_commutation.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.item_pwrdistr, Me.item_comm, Me.item_pwrcomm, Me.item_rest})
         Me.item_commutation.Name = "item_commutation"
-        Me.item_commutation.Size = New System.Drawing.Size(180, 22)
+        Me.item_commutation.Size = New System.Drawing.Size(175, 22)
         Me.item_commutation.Text = "Commutation"
         '
         'item_pwrdistr
@@ -524,19 +525,67 @@ Partial Class mainForm
         '
         Me.item_truss_and_motors.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.item_truss30x30, Me.item_truss40x40, Me.item_truss50x60, Me.item_motors, Me.item_rigging, Me.item_diff, Me.item_completeConstr, Me.item_stagelifts})
         Me.item_truss_and_motors.Name = "item_truss_and_motors"
-        Me.item_truss_and_motors.Size = New System.Drawing.Size(180, 22)
+        Me.item_truss_and_motors.Size = New System.Drawing.Size(175, 22)
         Me.item_truss_and_motors.Text = "Trusses and motors"
+        '
+        'item_truss30x30
+        '
+        Me.item_truss30x30.Name = "item_truss30x30"
+        Me.item_truss30x30.Size = New System.Drawing.Size(210, 22)
+        Me.item_truss30x30.Text = "&Truss30x30"
+        '
+        'item_truss40x40
+        '
+        Me.item_truss40x40.Name = "item_truss40x40"
+        Me.item_truss40x40.Size = New System.Drawing.Size(210, 22)
+        Me.item_truss40x40.Text = "&Truss40x40"
+        '
+        'item_truss50x60
+        '
+        Me.item_truss50x60.Name = "item_truss50x60"
+        Me.item_truss50x60.Size = New System.Drawing.Size(210, 22)
+        Me.item_truss50x60.Text = "&Truss50x60,52x52"
+        '
+        'item_motors
+        '
+        Me.item_motors.Name = "item_motors"
+        Me.item_motors.Size = New System.Drawing.Size(210, 22)
+        Me.item_motors.Text = "&Motors, motor controllers"
+        '
+        'item_rigging
+        '
+        Me.item_rigging.Name = "item_rigging"
+        Me.item_rigging.Size = New System.Drawing.Size(210, 22)
+        Me.item_rigging.Text = "&Rigging stuff"
+        '
+        'item_diff
+        '
+        Me.item_diff.Name = "item_diff"
+        Me.item_diff.Size = New System.Drawing.Size(210, 22)
+        Me.item_diff.Text = "&Different stuff"
+        '
+        'item_completeConstr
+        '
+        Me.item_completeConstr.Name = "item_completeConstr"
+        Me.item_completeConstr.Size = New System.Drawing.Size(210, 22)
+        Me.item_completeConstr.Text = "&Complete construction"
+        '
+        'item_stagelifts
+        '
+        Me.item_stagelifts.Name = "item_stagelifts"
+        Me.item_stagelifts.Size = New System.Drawing.Size(210, 22)
+        Me.item_stagelifts.Text = "&Stagelifts"
         '
         'item_construction
         '
         Me.item_construction.Name = "item_construction"
-        Me.item_construction.Size = New System.Drawing.Size(180, 22)
+        Me.item_construction.Size = New System.Drawing.Size(175, 22)
         Me.item_construction.Text = "Construction"
         '
         'item_sound
         '
         Me.item_sound.Name = "item_sound"
-        Me.item_sound.Size = New System.Drawing.Size(180, 22)
+        Me.item_sound.Size = New System.Drawing.Size(175, 22)
         Me.item_sound.Text = "Sound"
         '
         'menuItem_company
@@ -596,7 +645,7 @@ Partial Class mainForm
         '
         'btn_test
         '
-        Me.btn_test.Location = New System.Drawing.Point(247, 7)
+        Me.btn_test.Location = New System.Drawing.Point(292, 10)
         Me.btn_test.Name = "btn_test"
         Me.btn_test.Size = New System.Drawing.Size(75, 23)
         Me.btn_test.TabIndex = 3
@@ -640,7 +689,7 @@ Partial Class mainForm
         Me.GroupBox2.Controls.Add(Me.lbl_subsection)
         Me.GroupBox2.Location = New System.Drawing.Point(391, 5)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(261, 33)
+        Me.GroupBox2.Size = New System.Drawing.Size(289, 33)
         Me.GroupBox2.TabIndex = 2
         Me.GroupBox2.TabStop = False
         '
@@ -670,7 +719,7 @@ Partial Class mainForm
         Me.GroupBox1.Controls.Add(Me.lbl_department)
         Me.GroupBox1.Location = New System.Drawing.Point(1, 5)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(182, 33)
+        Me.GroupBox1.Size = New System.Drawing.Size(250, 33)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         '
@@ -872,109 +921,61 @@ Partial Class mainForm
         '
         'Column1
         '
-        DataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle57.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle57
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle1
         Me.Column1.HeaderText = "Смета"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
         'Column2
         '
-        DataGridViewCellStyle58.BackColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer))
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle58
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer))
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle2
         Me.Column2.HeaderText = "Belimlight"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
         '
         'Column3
         '
-        DataGridViewCellStyle59.BackColor = System.Drawing.Color.FromArgb(CType(CType(221, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(247, Byte), Integer))
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle59
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(221, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle3
         Me.Column3.HeaderText = "PRLighting"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
         '
         'Column4
         '
-        DataGridViewCellStyle60.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer))
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle60
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer))
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle4
         Me.Column4.HeaderText = "Blackout"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
         '
         'Column5
         '
-        DataGridViewCellStyle61.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(218, Byte), Integer))
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle61
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(218, Byte), Integer))
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle5
         Me.Column5.HeaderText = "Multivision"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
         '
         'Column6
         '
-        DataGridViewCellStyle62.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle62
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle6
         Me.Column6.HeaderText = "Stage"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
         '
         'Column7
         '
-        DataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle63.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Column7.DefaultCellStyle = DataGridViewCellStyle63
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Column7.DefaultCellStyle = DataGridViewCellStyle7
         Me.Column7.HeaderText = "Итого"
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
-        '
-        'item_truss30x30
-        '
-        Me.item_truss30x30.Name = "item_truss30x30"
-        Me.item_truss30x30.Size = New System.Drawing.Size(210, 22)
-        Me.item_truss30x30.Text = "&Truss30x30"
-        '
-        'item_truss40x40
-        '
-        Me.item_truss40x40.Name = "item_truss40x40"
-        Me.item_truss40x40.Size = New System.Drawing.Size(210, 22)
-        Me.item_truss40x40.Text = "&Truss40x40"
-        '
-        'item_truss50x60
-        '
-        Me.item_truss50x60.Name = "item_truss50x60"
-        Me.item_truss50x60.Size = New System.Drawing.Size(210, 22)
-        Me.item_truss50x60.Text = "&Truss50x60,52x52"
-        '
-        'item_motors
-        '
-        Me.item_motors.Name = "item_motors"
-        Me.item_motors.Size = New System.Drawing.Size(210, 22)
-        Me.item_motors.Text = "&Motors, motor controllers"
-        '
-        'item_rigging
-        '
-        Me.item_rigging.Name = "item_rigging"
-        Me.item_rigging.Size = New System.Drawing.Size(210, 22)
-        Me.item_rigging.Text = "&Rigging stuff"
-        '
-        'item_diff
-        '
-        Me.item_diff.Name = "item_diff"
-        Me.item_diff.Size = New System.Drawing.Size(210, 22)
-        Me.item_diff.Text = "&Different stuff"
-        '
-        'item_completeConstr
-        '
-        Me.item_completeConstr.Name = "item_completeConstr"
-        Me.item_completeConstr.Size = New System.Drawing.Size(210, 22)
-        Me.item_completeConstr.Text = "&Complete construction"
-        '
-        'item_stagelifts
-        '
-        Me.item_stagelifts.Name = "item_stagelifts"
-        Me.item_stagelifts.Size = New System.Drawing.Size(210, 22)
-        Me.item_stagelifts.Text = "&Stagelifts"
         '
         'mainForm
         '
