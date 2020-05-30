@@ -256,6 +256,44 @@ Public Class mainForm
     End Sub
 #End Region
 
+#Region "Construction"
+    Private Sub item_stageModules_Click(sender As Object, e As EventArgs) Handles item_stageModules.Click
+        iDepartment = 4
+        iCategory = 0
+        writeToLabel("Construction", sender)
+    End Sub
+
+    Private Sub item_scaffold_J001_Click(sender As Object, e As EventArgs) Handles item_scaffold_J001.Click
+        iDepartment = 4
+        iCategory = 1
+        writeToLabel("Construction", sender)
+    End Sub
+
+    Private Sub item_scaffold_J004_Click(sender As Object, e As EventArgs) Handles item_scaffold_J004.Click
+        iDepartment = 4
+        iCategory = 2
+        writeToLabel("Construction", sender)
+    End Sub
+
+    Private Sub item_scaffold_steps_Click(sender As Object, e As EventArgs) Handles item_scaffold_steps.Click
+        iDepartment = 4
+        iCategory = 3
+        writeToLabel("Construction", sender)
+    End Sub
+
+    Private Sub item_barricades_Click(sender As Object, e As EventArgs) Handles item_barricades.Click
+        iDepartment = 4
+        iCategory = 4
+        writeToLabel("Construction", sender)
+    End Sub
+
+    Private Sub item_details_Click(sender As Object, e As EventArgs) Handles item_details.Click
+        iDepartment = 4
+        iCategory = 5
+        writeToLabel("Construction", sender)
+    End Sub
+#End Region
+
 #Region "select Company"
     Private Sub item_belimlight_Click(sender As Object, e As EventArgs) Handles item_belimlight.Click
 
@@ -440,6 +478,8 @@ Public Class mainForm
     Private Sub btn_save_Click(sender As Object, e As EventArgs) Handles btn_save.Click, btn_cancel.Click
 
     End Sub
+
+
 
     Sub format_sumDGV()
 
