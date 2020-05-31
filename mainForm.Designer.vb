@@ -23,13 +23,13 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
-        Dim DataGridViewCellStyle57 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle58 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle59 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle60 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle61 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle62 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle63 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -148,6 +148,11 @@ Partial Class mainForm
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.item_speakers = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_ampracks = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_monitors = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_mixdesks = New System.Windows.Forms.ToolStripMenuItem()
+        Me.item_dj_stage = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -627,6 +632,7 @@ Partial Class mainForm
         '
         'item_sound
         '
+        Me.item_sound.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.item_speakers, Me.item_ampracks, Me.item_monitors, Me.item_mixdesks, Me.item_dj_stage})
         Me.item_sound.Name = "item_sound"
         Me.item_sound.Size = New System.Drawing.Size(180, 22)
         Me.item_sound.Text = "Sound"
@@ -671,7 +677,7 @@ Partial Class mainForm
         'item_summary
         '
         Me.item_summary.Name = "item_summary"
-        Me.item_summary.Size = New System.Drawing.Size(180, 22)
+        Me.item_summary.Size = New System.Drawing.Size(169, 22)
         Me.item_summary.Text = "Pivot table"
         '
         'Panel1
@@ -964,61 +970,91 @@ Partial Class mainForm
         '
         'Column1
         '
-        DataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle57.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle57
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle29.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle29
         Me.Column1.HeaderText = "Смета"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
         'Column2
         '
-        DataGridViewCellStyle58.BackColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer))
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle58
+        DataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer))
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle30
         Me.Column2.HeaderText = "Belimlight"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
         '
         'Column3
         '
-        DataGridViewCellStyle59.BackColor = System.Drawing.Color.FromArgb(CType(CType(221, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(247, Byte), Integer))
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle59
+        DataGridViewCellStyle31.BackColor = System.Drawing.Color.FromArgb(CType(CType(221, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle31
         Me.Column3.HeaderText = "PRLighting"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
         '
         'Column4
         '
-        DataGridViewCellStyle60.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer))
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle60
+        DataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer))
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle32
         Me.Column4.HeaderText = "Blackout"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
         '
         'Column5
         '
-        DataGridViewCellStyle61.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(218, Byte), Integer))
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle61
+        DataGridViewCellStyle33.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(218, Byte), Integer))
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle33
         Me.Column5.HeaderText = "Multivision"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
         '
         'Column6
         '
-        DataGridViewCellStyle62.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle62
+        DataGridViewCellStyle34.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle34
         Me.Column6.HeaderText = "Stage"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
         '
         'Column7
         '
-        DataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle63.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Column7.DefaultCellStyle = DataGridViewCellStyle63
+        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle35.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Column7.DefaultCellStyle = DataGridViewCellStyle35
         Me.Column7.HeaderText = "Итого"
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True
+        '
+        'item_speakers
+        '
+        Me.item_speakers.Name = "item_speakers"
+        Me.item_speakers.Size = New System.Drawing.Size(180, 22)
+        Me.item_speakers.Text = "&Speakers"
+        '
+        'item_ampracks
+        '
+        Me.item_ampracks.Name = "item_ampracks"
+        Me.item_ampracks.Size = New System.Drawing.Size(180, 22)
+        Me.item_ampracks.Text = "&AmpRacks"
+        '
+        'item_monitors
+        '
+        Me.item_monitors.Name = "item_monitors"
+        Me.item_monitors.Size = New System.Drawing.Size(180, 22)
+        Me.item_monitors.Text = "&Monitors"
+        '
+        'item_mixdesks
+        '
+        Me.item_mixdesks.Name = "item_mixdesks"
+        Me.item_mixdesks.Size = New System.Drawing.Size(180, 22)
+        Me.item_mixdesks.Text = "&Mixing desks"
+        '
+        'item_dj_stage
+        '
+        Me.item_dj_stage.Name = "item_dj_stage"
+        Me.item_dj_stage.Size = New System.Drawing.Size(180, 22)
+        Me.item_dj_stage.Text = "&DJ equipment"
         '
         'mainForm
         '
@@ -1170,4 +1206,9 @@ Partial Class mainForm
     Friend WithEvents item_scaffold_steps As ToolStripMenuItem
     Friend WithEvents item_barricades As ToolStripMenuItem
     Friend WithEvents item_details As ToolStripMenuItem
+    Friend WithEvents item_speakers As ToolStripMenuItem
+    Friend WithEvents item_ampracks As ToolStripMenuItem
+    Friend WithEvents item_monitors As ToolStripMenuItem
+    Friend WithEvents item_mixdesks As ToolStripMenuItem
+    Friend WithEvents item_dj_stage As ToolStripMenuItem
 End Class

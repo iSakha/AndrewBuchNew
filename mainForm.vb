@@ -26,8 +26,13 @@ Public Class mainForm
 
     Public sCompany() As String = {"belimlight", "PRLighting", "blackout", "vision", "stage"}
 
-
+    '===================================================================================
+    '             === mainForm_Load ===
+    '===================================================================================
     Private Sub mainForm_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        '                   check expiration date
+        '-----------------------------------------------------------------------------------
 
         Dim daysStayed As Int32 = My.Settings.expireDate.Subtract(currentDate).Days
 
@@ -49,7 +54,13 @@ Public Class mainForm
             Me.Close()
         End If
     End Sub
+    '===================================================================================
+    '             === Menu items ===
+    '===================================================================================
 #Region "Menu items"
+
+    '                   loadDataBase
+    '-----------------------------------------------------------------------------------
     Private Sub FolderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FolderToolStripMenuItem.Click
 
         iDepartment = 0
@@ -64,7 +75,7 @@ Public Class mainForm
         Me.Close()
     End Sub
 
-#Region "select Lighting categories"
+#Region "select Lighting"
     Private Sub item_movHeads_Click(sender As Object, e As EventArgs) Handles item_movHeads.Click
 
         iDepartment = 0
@@ -130,7 +141,7 @@ Public Class mainForm
     End Sub
 #End Region
 
-#Region "select Screen categories"
+#Region "select Screen"
     Private Sub item_modules_Click(sender As Object, e As EventArgs) Handles item_modules.Click
         iDepartment = 1
         iCategory = 0
@@ -180,7 +191,7 @@ Public Class mainForm
     End Sub
 #End Region
 
-#Region "Select commutation"
+#Region "Select Commutation"
     Private Sub item_pwrdistr_Click(sender As Object, e As EventArgs) Handles item_pwrdistr.Click
         iDepartment = 2
         iCategory = 0
@@ -256,7 +267,7 @@ Public Class mainForm
     End Sub
 #End Region
 
-#Region "Construction"
+#Region "Select Construction"
     Private Sub item_stageModules_Click(sender As Object, e As EventArgs) Handles item_stageModules.Click
         iDepartment = 4
         iCategory = 0
@@ -292,6 +303,39 @@ Public Class mainForm
         iCategory = 5
         writeToLabel("Construction", sender)
     End Sub
+#End Region
+
+#Region "Select Sound"
+    Private Sub item_speakers_Click(sender As Object, e As EventArgs) Handles item_speakers.Click
+        iDepartment = 5
+        iCategory = 0
+        writeToLabel("Sound", sender)
+    End Sub
+
+    Private Sub item_ampracks_Click(sender As Object, e As EventArgs) Handles item_ampracks.Click
+        iDepartment = 5
+        iCategory = 1
+        writeToLabel("Sound", sender)
+    End Sub
+
+    Private Sub item_monitors_Click(sender As Object, e As EventArgs) Handles item_monitors.Click
+        iDepartment = 5
+        iCategory = 2
+        writeToLabel("Sound", sender)
+    End Sub
+
+    Private Sub item_mixdesks_Click(sender As Object, e As EventArgs) Handles item_mixdesks.Click
+        iDepartment = 5
+        iCategory = 3
+        writeToLabel("Sound", sender)
+    End Sub
+
+    Private Sub item_dj_stage_Click(sender As Object, e As EventArgs) Handles item_dj_stage.Click
+        iDepartment = 5
+        iCategory = 4
+        writeToLabel("Sound", sender)
+    End Sub
+
 #End Region
 
 #Region "select Company"
