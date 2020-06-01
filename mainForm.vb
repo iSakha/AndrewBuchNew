@@ -425,14 +425,16 @@ Public Class mainForm
 
     End Sub
     Private Sub item_summary_Click(sender As Object, e As EventArgs) Handles item_summary.Click
-        iCompany = 0
+
+        'iCompany = 0
         sumForm.Show()
-        create_dataset()
+        'create_dataset()
         sumForm.dgv_sum.DataSource = dts.Tables(0)
         sumForm.dgv_sum.Columns(8).Visible = False
         sumForm.dgv_sum.Columns(9).Visible = False
         sumForm.dgv_sum.Columns(10).Visible = False
         format_sumDGV()
+
     End Sub
 
 #End Region
@@ -513,6 +515,7 @@ Public Class mainForm
     Private Sub btn_update_Click(sender As Object, e As EventArgs) Handles btn_update.Click
         updateData()
         calcQuantity()
+        format_sumDGV()
     End Sub
 
     Private Sub btn_delete_Click(sender As Object, e As EventArgs) Handles btn_delete.Click
@@ -562,15 +565,15 @@ Public Class mainForm
 
             sumForm.dgv_sum.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250)
             If sumForm.dgv_sum.Item(11, i).Value = 0 Then
-                sumForm.dgv_sum.Item(0, i).Style.BackColor = Color.LightGreen
-                sumForm.dgv_sum.Item(1, i).Style.BackColor = Color.LightGreen
-                sumForm.dgv_sum.Item(2, i).Style.BackColor = Color.LightGreen
-                sumForm.dgv_sum.Item(11, i).Style.BackColor = Color.LightGreen
+                sumForm.dgv_sum.Item(0, i).Style.BackColor = Color.FromArgb(216, 238, 192)
+                sumForm.dgv_sum.Item(1, i).Style.BackColor = Color.FromArgb(216, 238, 192)
+                sumForm.dgv_sum.Item(2, i).Style.BackColor = Color.FromArgb(216, 238, 192)
+                sumForm.dgv_sum.Item(11, i).Style.BackColor = Color.FromArgb(216, 238, 192)
             Else
-                sumForm.dgv_sum.Item(0, i).Style.BackColor = Color.LightPink
-                sumForm.dgv_sum.Item(1, i).Style.BackColor = Color.LightPink
-                sumForm.dgv_sum.Item(2, i).Style.BackColor = Color.LightPink
-                sumForm.dgv_sum.Item(11, i).Style.BackColor = Color.LightPink
+                sumForm.dgv_sum.Item(0, i).Style.BackColor = Color.FromArgb(255, 183, 183)
+                sumForm.dgv_sum.Item(1, i).Style.BackColor = Color.FromArgb(255, 183, 183)
+                sumForm.dgv_sum.Item(2, i).Style.BackColor = Color.FromArgb(255, 183, 183)
+                sumForm.dgv_sum.Item(11, i).Style.BackColor = Color.FromArgb(255, 183, 183)
             End If
         Next i
 
@@ -612,6 +615,7 @@ Public Class mainForm
         'sumForm.dgv_sum.Columns(0).Visible = False
 
         '-----------------------------------------------------------------------------------------
+        Console.WriteLine(dts.Tables.Count)
 
     End Sub
 

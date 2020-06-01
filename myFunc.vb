@@ -33,7 +33,7 @@ Module myFunc
         mainForm.i_pivot_wsDict = New Dictionary(Of Integer, Dictionary(Of Integer, ExcelWorksheet))
 
         For Each foundFile As String In My.Computer.FileSystem.GetFiles _
-        (mainForm.sDir, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.xlsx")
+        (mainForm.sDir, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.omdb")
 
             '   Extract file name from full path
 
@@ -237,7 +237,7 @@ Module myFunc
 
         Dim index As Integer
         index = _e.RowIndex
-        'Console.WriteLine(index)
+        Console.WriteLine(_e)
         Dim selectedRow As DataGridViewRow
         selectedRow = _sender.Rows(index)
 
@@ -363,6 +363,7 @@ Module myFunc
 
         Dim index As Integer
         Dim i, j, qty, sum As Integer
+        ' Dim smetaQty, companiesQty As Integer
 
         'i = mainForm.iCategory + 1
 
@@ -400,6 +401,7 @@ Module myFunc
         End If
     End Sub
 
+
     Sub writeZeroInQtyTxt()
         If mainForm.txt_qty.Text = "" Then
             mainForm.txt_qty.Text = 0
@@ -426,6 +428,7 @@ Module myFunc
         Dim index As Integer = mainForm.dgv.CurrentRow.Index
         row = dt.Rows(index)
 
+
         Dim sRow() As String
 
         sRow = New String() {
@@ -438,6 +441,7 @@ Module myFunc
                 mainForm.rtb_ThirdName.Text,
                 mainForm.txt_qty3.Text
             }
+
         '   Chek null values in textboxes
 
         For i As Integer = 1 To sRow.Count - 1 Step 2
@@ -447,17 +451,33 @@ Module myFunc
                 Exit Sub
             End If
         Next i
-
+        Console.WriteLine(dt.TableName)
         For i As Integer = 1 To mainForm.dts.Tables.Count
 
             For j As Integer = 1 To mainForm.dts.Tables(1).Columns.Count - 1
                 row.Item(j) = sRow(j - 1)
             Next j
+
         Next i
 
-        mainForm.dgv.DataSource = mainForm.dts.Tables(mainForm.iCompany)
+        Dim qty As Integer
+        Dim qty_belimlight, qty_pr, qty_black, qty_vis, qty_stage As Integer
+        qty = dt.Rows(index).Item(4) + dt.Rows(index).Item(6) + dt.Rows(index).Item(8)
+        Console.WriteLine(qty)
 
-        ' update_sumDatatable(_index)
+        mainForm.dts.Tables(0).Rows(index).Item(mainForm.iCompany + 2) = qty
+
+        qty_belimlight = mainForm.dts.Tables(0).Rows(index).Item(3)
+        qty_pr = mainForm.dts.Tables(0).Rows(index).Item(4)
+        qty_black = mainForm.dts.Tables(0).Rows(index).Item(5)
+        qty_vis = mainForm.dts.Tables(0).Rows(index).Item(6)
+        qty_stage = mainForm.dts.Tables(0).Rows(index).Item(7)
+
+        mainForm.dts.Tables(0).Rows(index).Item(11) = mainForm.dts.Tables(0).Rows(index).Item(2) - (qty_belimlight + qty_pr + qty_black + qty_vis + qty_stage)
+        mainForm.dts.AcceptChanges()
+        mainForm.dgv.DataSource = mainForm.dts.Tables(mainForm.iCompany)
+        sumForm.dgv_sum.DataSource = mainForm.dts.Tables(0)
+
 
     End Sub
 
