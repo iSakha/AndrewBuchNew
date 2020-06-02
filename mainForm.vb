@@ -12,6 +12,7 @@ Public Class mainForm
     Dim lastRunDate As Date = My.Settings.lastRun
 
     Public fileNames As Collection
+    Public filePath As Collection
 
     ' Dictionaries with Integer key
     Public i_wsDict As Dictionary(Of Integer, ExcelWorksheet)
@@ -25,6 +26,8 @@ Public Class mainForm
     Public dts As DataSet
 
     Public sCompany() As String = {"belimlight", "PRLighting", "blackout", "vision", "stage"}
+
+    Public delta As Integer     ' to increase or decrease table when push Add or Delete 
 
     '===================================================================================
     '             === mainForm_Load ===
@@ -509,24 +512,27 @@ Public Class mainForm
     End Sub
 
     Private Sub btn_add_Click(sender As Object, e As EventArgs) Handles btn_add.Click
-
+        delta = 1
     End Sub
 
     Private Sub btn_update_Click(sender As Object, e As EventArgs) Handles btn_update.Click
         updateData()
         calcQuantity()
         format_sumDGV()
+        delta = 0
     End Sub
 
     Private Sub btn_delete_Click(sender As Object, e As EventArgs) Handles btn_delete.Click
-
+        delta = -1
     End Sub
 
     Private Sub btn_save_Click(sender As Object, e As EventArgs) Handles btn_save.Click, btn_cancel.Click
-
+        saveButton(delta)
     End Sub
 
-
+    '===================================================================================
+    '             === Format sumDGV ===
+    '===================================================================================
 
     Sub format_sumDGV()
 
@@ -585,6 +591,7 @@ Public Class mainForm
     '===================================================================================      
     '                === Test button ===
     '===================================================================================
+#Region "TestButton"
     Private Sub btn_test_Click(sender As Object, e As EventArgs) Handles btn_test.Click
 
         '-----------------------------------------------------------------------------------------
@@ -615,9 +622,10 @@ Public Class mainForm
         'sumForm.dgv_sum.Columns(0).Visible = False
 
         '-----------------------------------------------------------------------------------------
-        Console.WriteLine(dts.Tables.Count)
+        'backUp_db()
+        '-----------------------------------------------------------------------------------------
 
     End Sub
-
+#End Region
 
 End Class

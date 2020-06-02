@@ -1,6 +1,7 @@
 ﻿Imports OfficeOpenXml
 Imports OfficeOpenXml.Table
 Imports System.IO
+Imports System.Text.RegularExpressions
 
 Module myFunc
 
@@ -16,6 +17,8 @@ Module myFunc
         mainForm.FBD.SelectedPath = Directory.GetCurrentDirectory()
         If (mainForm.FBD.ShowDialog() = DialogResult.OK) Then
             mainForm.sDir = mainForm.FBD.SelectedPath
+        Else
+            Return
         End If
 
 
@@ -25,6 +28,7 @@ Module myFunc
         Dim name As String                           ' variable to get name of database file
 
         mainForm.fileNames = New Collection         ' collection of names of each file
+        mainForm.filePath = New Collection         ' collection of full path of each file
 
         Dim key As Integer = 0
 
@@ -38,6 +42,9 @@ Module myFunc
             '   Extract file name from full path
 
             mainForm.sFilePath = CStr(foundFile)         ' full path to database file
+
+            mainForm.filePath.Add(mainForm.sFilePath)
+
             Dim SplitFileName_DB() As String
             SplitFileName_DB = Split(mainForm.sFilePath, "\")
             name = SplitFileName_DB(SplitFileName_DB.Count - 1)
@@ -480,5 +487,74 @@ Module myFunc
 
 
     End Sub
+
+    '===================================================================================
+    '             === SAVE data to DB ===
+    '===================================================================================
+
+    Sub saveButton(_delta As Integer)
+
+        Dim oldAddr As OfficeOpenXml.ExcelAddressBase
+        Dim newAddr As OfficeOpenXml.ExcelAddressBase
+
+        Dim dt As DataTable
+        Dim ws As ExcelWorksheet
+
+        Dim xlTable As ExcelTable
+        Dim startCellAddress As String
+
+        Dim excelFile = New FileInfo(mainForm.filePath(mainForm.iDepartment + 1))
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+        Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
+
+        ws = Excel.Workbook.Worksheets(mainForm.iCategory)
+
+
+        '   Write to Exceltable
+        dt = mainForm.dts.Tables(mainForm.iCompany)
+
+        xlTable = ws.Tables(mainForm.iCompany)
+        startCellAddress = xlTable.Range.Start.Address
+
+        oldAddr = xlTable.Address
+        newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row + _delta, oldAddr.End.Column)
+        xlTable.TableXml.InnerXml = xlTable.TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
+
+        xlTable.Range.Clear()
+        ws.Cells(startCellAddress).LoadFromDataTable(dt, True)
+
+        '   Write to pivot Exceltable
+        dt = mainForm.dts.Tables(0)
+
+        xlTable = ws.Tables(0)
+        startCellAddress = xlTable.Range.Start.Address
+
+        oldAddr = xlTable.Address
+        newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row + _delta, oldAddr.End.Column)
+        xlTable.TableXml.InnerXml = xlTable.TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
+
+        xlTable.Range.Clear()
+        ws.Cells(startCellAddress).LoadFromDataTable(dt, True)
+
+        Excel.SaveAs(excelFile)
+
+    End Sub
+
+    Sub backUp_db()
+
+        Dim folderName, backUpFolder As String
+        Dim format As String = ("yyy MM dd HH':'mm':'ss")
+        Dim myDate As DateTime = DateTime.Now
+        folderName = myDate.ToString(format)
+        Console.WriteLine(folderName)
+        folderName = Regex.Replace(folderName, "\D", "")            ' timestamp name
+        Console.WriteLine(folderName)
+
+        Console.WriteLine(Directory.GetCurrentDirectory())
+        backUpFolder = Directory.GetCurrentDirectory() & "\BackUp"
+        '   Create folder with timestamp name inside backUp folder
+        My.Computer.FileSystem.CreateDirectory(backUpFolder & "\" & folderName)
+    End Sub
+
 
 End Module
