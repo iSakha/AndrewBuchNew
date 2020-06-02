@@ -513,6 +513,7 @@ Public Class mainForm
 
     Private Sub btn_add_Click(sender As Object, e As EventArgs) Handles btn_add.Click
         delta = 1
+        addForm.Show()
     End Sub
 
     Private Sub btn_update_Click(sender As Object, e As EventArgs) Handles btn_update.Click
@@ -523,6 +524,7 @@ Public Class mainForm
     End Sub
 
     Private Sub btn_delete_Click(sender As Object, e As EventArgs) Handles btn_delete.Click
+        deleteRow()
         delta = -1
     End Sub
 

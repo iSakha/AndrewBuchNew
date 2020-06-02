@@ -95,6 +95,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="addForm.Designer.vb">
+      <DependentUpon>addForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="addForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sumForm.Designer.vb">
       <DependentUpon>sumForm.vb</DependentUpon>
     </Compile>
@@ -125,6 +131,9 @@
     <Compile Include="myFunc.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="addForm.resx">
+      <DependentUpon>addForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sumForm.resx">
       <DependentUpon>sumForm.vb</DependentUpon>
     </EmbeddedResource>

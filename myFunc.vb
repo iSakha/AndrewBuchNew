@@ -487,7 +487,19 @@ Module myFunc
 
 
     End Sub
+    '===================================================================================
+    '             === DELETE data from DB ===
+    '===================================================================================
+    Sub deleteRow()
 
+        Dim index As Integer = mainForm.dgv.CurrentRow.Index
+        Dim row As DataRow
+
+        For Each dt As DataTable In mainForm.dts.Tables
+            row = dt.Rows(index)
+            row.Delete()
+        Next dt
+    End Sub
     '===================================================================================
     '             === SAVE data to DB ===
     '===================================================================================
@@ -509,32 +521,57 @@ Module myFunc
 
         ws = Excel.Workbook.Worksheets(mainForm.iCategory)
 
+        Select Case _delta
+            Case 0
+                '   Write to Exceltable
+                dt = mainForm.dts.Tables(mainForm.iCompany)
 
-        '   Write to Exceltable
-        dt = mainForm.dts.Tables(mainForm.iCompany)
+                xlTable = ws.Tables(mainForm.iCompany)
+                startCellAddress = xlTable.Range.Start.Address
 
-        xlTable = ws.Tables(mainForm.iCompany)
-        startCellAddress = xlTable.Range.Start.Address
+                xlTable.Range.Clear()
+                ws.Cells(startCellAddress).LoadFromDataTable(dt, True)
 
-        oldAddr = xlTable.Address
-        newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row + _delta, oldAddr.End.Column)
-        xlTable.TableXml.InnerXml = xlTable.TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
+                '   Write to pivot Exceltable
+                dt = mainForm.dts.Tables(0)
 
-        xlTable.Range.Clear()
-        ws.Cells(startCellAddress).LoadFromDataTable(dt, True)
+                xlTable = ws.Tables(0)
+                startCellAddress = xlTable.Range.Start.Address
 
-        '   Write to pivot Exceltable
-        dt = mainForm.dts.Tables(0)
+                xlTable.Range.Clear()
+                ws.Cells(startCellAddress).LoadFromDataTable(dt, True)
 
-        xlTable = ws.Tables(0)
-        startCellAddress = xlTable.Range.Start.Address
+            Case <> 0
+                For i As Integer = 1 To mainForm.sCompany.Count
 
-        oldAddr = xlTable.Address
-        newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row + _delta, oldAddr.End.Column)
-        xlTable.TableXml.InnerXml = xlTable.TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
+                    dt = mainForm.dts.Tables(i)
 
-        xlTable.Range.Clear()
-        ws.Cells(startCellAddress).LoadFromDataTable(dt, True)
+                    xlTable = ws.Tables(i)
+                    oldAddr = xlTable.Address
+                    newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row + _delta, oldAddr.End.Column)
+                    xlTable.TableXml.InnerXml = xlTable.TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
+
+                    startCellAddress = xlTable.Range.Start.Address
+
+                    xlTable.Range.Clear()
+                    ws.Cells(startCellAddress).LoadFromDataTable(dt, True)
+
+                Next i
+
+                '   Write to pivot Exceltable
+                dt = mainForm.dts.Tables(0)
+
+                xlTable = ws.Tables(0)
+                oldAddr = xlTable.Address
+                newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row + _delta, oldAddr.End.Column)
+                xlTable.TableXml.InnerXml = xlTable.TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
+
+                startCellAddress = xlTable.Range.Start.Address
+
+                xlTable.Range.Clear()
+                ws.Cells(startCellAddress).LoadFromDataTable(dt, True)
+
+        End Select
 
         Excel.SaveAs(excelFile)
 
