@@ -14,3 +14,6 @@ C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\bin\D
 C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.vbproj.CopyComplete
 C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.sumForm.resources
 C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.addForm.resources
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\bin\Debug\DotNetZip.dll
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\bin\Debug\DotNetZip.pdb
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\bin\Debug\DotNetZip.xml

@@ -14,12 +14,12 @@ Module myFunc
 
         '   1.   Get database folder over Folder browser
 
-        mainForm.FBD.SelectedPath = Directory.GetCurrentDirectory()
-        If (mainForm.FBD.ShowDialog() = DialogResult.OK) Then
-            mainForm.sDir = mainForm.FBD.SelectedPath
-        Else
-            Return
-        End If
+        'mainForm.FBD.SelectedPath = Directory.GetCurrentDirectory()
+        'If (mainForm.FBD.ShowDialog() = DialogResult.OK) Then
+        '    mainForm.sDir = mainForm.FBD.SelectedPath
+        'Else
+        '    Return
+        'End If
 
 
 
@@ -579,10 +579,11 @@ Module myFunc
 
     Sub backUp_db()
 
-        Dim folderName, backUpFolder As String
+        Dim folderName, backUpFolder, backUpFile, foundFile As String
         Dim format As String = ("yyy MM dd HH':'mm':'ss")
         Dim myDate As DateTime = DateTime.Now
         folderName = myDate.ToString(format)
+
         Console.WriteLine(folderName)
         folderName = Regex.Replace(folderName, "\D", "")            ' timestamp name
         Console.WriteLine(folderName)
@@ -591,6 +592,21 @@ Module myFunc
         backUpFolder = Directory.GetCurrentDirectory() & "\BackUp"
         '   Create folder with timestamp name inside backUp folder
         My.Computer.FileSystem.CreateDirectory(backUpFolder & "\" & folderName)
+        backUpFile = Directory.GetCurrentDirectory() & "\BackUp\" & folderName & "\DB.ombckp"
+
+        mainForm.FBD.SelectedPath = Directory.GetCurrentDirectory()
+        If (mainForm.FBD.ShowDialog() = DialogResult.OK) Then
+            mainForm.sDir = mainForm.FBD.SelectedPath
+        Else
+            Return
+        End If
+
+        For Each foundFile In My.Computer.FileSystem.GetFiles _
+        (mainForm.sDir, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.omdb")
+            Console.WriteLine(foundFile)
+        Next
+        MsgBox("Создаем резервную копию базы данных в папке BackUp", vbOKOnly + vbInformation)
+        My.Computer.FileSystem.CopyFile(foundFile, backUpFile)
     End Sub
 
 
