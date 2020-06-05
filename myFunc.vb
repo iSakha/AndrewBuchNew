@@ -6,94 +6,6 @@ Imports Ionic.Zip
 
 Module myFunc
 
-    '===================================================================================
-    '             === Load database ===
-    '===================================================================================
-
-    Sub loadDataBaseFolder()
-
-
-        '   1.   Get database folder over Folder browser
-
-        'mainForm.FBD.SelectedPath = Directory.GetCurrentDirectory()
-        'If (mainForm.FBD.ShowDialog() = DialogResult.OK) Then
-        '    mainForm.sDir = mainForm.FBD.SelectedPath
-        'Else
-        '    Return
-        'End If
-
-
-
-        '   2.   Get list of database files , names of each file, list of worksheets in each file
-
-        Dim name As String                           ' variable to get name of database file
-
-        mainForm.fileNames = New Collection         ' collection of names of each file
-        mainForm.filePath = New Collection         ' collection of full path of each file
-
-        Dim key As Integer = 0
-
-        mainForm.i_superPivotDict = New Dictionary(Of Integer, Dictionary(Of Integer, Dictionary(Of Integer, ExcelTable)))
-        mainForm.i_pivotTableDict = New Dictionary(Of Integer, Dictionary(Of Integer, ExcelTable))
-        mainForm.i_pivot_wsDict = New Dictionary(Of Integer, Dictionary(Of Integer, ExcelWorksheet))
-
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles _
-        (mainForm.sDir, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.omdb")
-
-            '   Extract file name from full path
-
-            mainForm.sFilePath = CStr(foundFile)         ' full path to database file
-
-            mainForm.filePath.Add(mainForm.sFilePath)
-
-            Dim SplitFileName_DB() As String
-            SplitFileName_DB = Split(mainForm.sFilePath, "\")
-            name = SplitFileName_DB(SplitFileName_DB.Count - 1)
-            SplitFileName_DB = Split(name, ".")
-            name = SplitFileName_DB(0)
-
-            mainForm.fileNames.Add(name)             ' add name of each file to name collection
-
-
-            '   Create collection of Excel files workSheets
-
-            Dim ws As ExcelWorksheet
-            Dim excelFile = New FileInfo(mainForm.sFilePath)
-
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial
-            Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
-
-
-            key = key + 1
-
-            mainForm.i_wsDict = New Dictionary(Of Integer, ExcelWorksheet)
-
-            For i As Integer = 0 To Excel.Workbook.Worksheets.Count - 1
-
-                mainForm.i_xlTableDict = New Dictionary(Of Integer, ExcelTable)
-
-                ws = Excel.Workbook.Worksheets(i)
-
-                mainForm.i_wsDict.Add(i, ws)
-
-                Dim k As Integer = 0
-                For Each tbl As ExcelTable In ws.Tables
-
-                    mainForm.i_xlTableDict.Add(k, tbl)
-                    k = k + 1
-                Next tbl
-
-                mainForm.i_pivotTableDict.Add(i, mainForm.i_xlTableDict)
-            Next i
-
-            mainForm.i_pivot_wsDict.Add(key - 1, mainForm.i_wsDict)
-            mainForm.i_superPivotDict.Add(key - 1, mainForm.i_pivotTableDict)
-
-            mainForm.i_pivotTableDict = New Dictionary(Of Integer, Dictionary(Of Integer, ExcelTable))
-        Next
-
-
-    End Sub
 
     '===================================================================================
     '             === Create dataset ===
@@ -408,20 +320,20 @@ Module myFunc
     End Sub
 
 
-    Sub writeZeroInQtyTxt()
-        If mainForm.txt_qty.Text = "" Then
-            mainForm.txt_qty.Text = 0
-        End If
-        If mainForm.txt_qty1.Text = "" Then
-            mainForm.txt_qty1.Text = 0
-        End If
-        If mainForm.txt_qty2.Text = "" Then
-            mainForm.txt_qty2.Text = 0
-        End If
-        If mainForm.txt_qty3.Text = "" Then
-            mainForm.txt_qty3.Text = 0
-        End If
-    End Sub
+    'Sub writeZeroInQtyTxt()
+    '    If mainForm.txt_qty.Text = "" Then
+    '        mainForm.txt_qty.Text = 0
+    '    End If
+    '    If mainForm.txt_qty1.Text = "" Then
+    '        mainForm.txt_qty1.Text = 0
+    '    End If
+    '    If mainForm.txt_qty2.Text = "" Then
+    '        mainForm.txt_qty2.Text = 0
+    '    End If
+    '    If mainForm.txt_qty3.Text = "" Then
+    '        mainForm.txt_qty3.Text = 0
+    '    End If
+    'End Sub
 
     '===================================================================================
     '             === UPDATE data in DB ===
@@ -578,74 +490,39 @@ Module myFunc
 
     End Sub
 
-    Sub backUp_db()
+    'Sub backUp_db()
 
-        Dim folderName, backUpFolder, backUpFile, foundFile As String
-        Dim format As String = ("yyy MM dd HH':'mm':'ss")
-        Dim myDate As DateTime = DateTime.Now
-        folderName = myDate.ToString(format)
+    '    Dim folderName, backUpFolder, backUpFile, foundFile As String
+    '    Dim format As String = ("yyy MM dd HH':'mm':'ss")
+    '    Dim myDate As DateTime = DateTime.Now
+    '    folderName = myDate.ToString(format)
 
-        Console.WriteLine(folderName)
-        folderName = Regex.Replace(folderName, "\D", "")            ' timestamp name
-        Console.WriteLine(folderName)
+    '    Console.WriteLine(folderName)
+    '    folderName = Regex.Replace(folderName, "\D", "")            ' timestamp name
+    '    Console.WriteLine(folderName)
 
-        Console.WriteLine(Directory.GetCurrentDirectory())
-        backUpFolder = Directory.GetCurrentDirectory() & "\BackUp"
-        '   Create folder with timestamp name inside backUp folder
-        My.Computer.FileSystem.CreateDirectory(backUpFolder & "\" & folderName)
-        backUpFile = Directory.GetCurrentDirectory() & "\BackUp\" & folderName & "\DB.ombckp"
+    '    Console.WriteLine(Directory.GetCurrentDirectory())
+    '    backUpFolder = Directory.GetCurrentDirectory() & "\BackUp"
+    '    '   Create folder with timestamp name inside backUp folder
+    '    My.Computer.FileSystem.CreateDirectory(backUpFolder & "\" & folderName)
+    '    backUpFile = Directory.GetCurrentDirectory() & "\BackUp\" & folderName & "\DB.ombckp"
 
-        mainForm.FBD.SelectedPath = Directory.GetCurrentDirectory()
-        If (mainForm.FBD.ShowDialog() = DialogResult.OK) Then
-            mainForm.sDir = mainForm.FBD.SelectedPath
-        Else
-            mainForm.Close()
-        End If
+    '    mainForm.FBD.SelectedPath = Directory.GetCurrentDirectory()
+    '    If (mainForm.FBD.ShowDialog() = DialogResult.OK) Then
+    '        mainForm.sDir = mainForm.FBD.SelectedPath
+    '    Else
+    '        mainForm.Close()
+    '    End If
 
-        'For Each foundFile In My.Computer.FileSystem.GetFiles _
-        '(mainForm.sDir, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.omdb")
-        '    Console.WriteLine(foundFile)
-        'Next
-        'MsgBox("Создаем резервную копию базы данных в папке BackUp", vbOKOnly + vbInformation)
-        'My.Computer.FileSystem.CopyFile(foundFile, backUpFile)
-    End Sub
+    '    'For Each foundFile In My.Computer.FileSystem.GetFiles _
+    '    '(mainForm.sDir, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.omdb")
+    '    '    Console.WriteLine(foundFile)
+    '    'Next
+    '    'MsgBox("Создаем резервную копию базы данных в папке BackUp", vbOKOnly + vbInformation)
+    '    'My.Computer.FileSystem.CopyFile(foundFile, backUpFile)
+    'End Sub
 
-    Sub extractFiles()
 
-        Using zip As ZipFile = ZipFile.Read(mainForm.sDir & "\DB.omdb")
 
-            zip.Password = "iSakha2836"
-            zip.ExtractAll(mainForm.sDir & "\Temp", ExtractExistingFileAction.OverwriteSilently)
 
-        End Using
-        mainForm.sDir = mainForm.sDir & "\Temp"
-    End Sub
-
-    Sub compressFiles()
-
-        Try
-
-            Dim sFolderPath As String = mainForm.sDir               ' Temp folder
-            Console.WriteLine(sFolderPath)
-
-            Dim Files() As String = IO.Directory.GetFiles(sFolderPath)
-
-            Using zip As ZipFile = New ZipFile
-
-                zip.Password = "iSakha2836"
-                zip.Encryption = Ionic.Zip.EncryptionAlgorithm.WinZipAes256
-                zip.AddDirectory(sFolderPath)
-                zip.Save(Directory.GetCurrentDirectory() & "\database\DB.omdb")
-
-            End Using
-
-        Catch
-        End Try
-
-    End Sub
-
-    Sub deleteTemp()
-        Dim sFolderPath As String = mainForm.sDir               ' Temp folder
-        My.Computer.FileSystem.DeleteDirectory(sFolderPath, FileIO.DeleteDirectoryOption.DeleteAllContents)
-    End Sub
 End Module

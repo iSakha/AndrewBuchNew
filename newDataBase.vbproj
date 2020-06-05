@@ -105,6 +105,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="load_and_close.vb" />
     <Compile Include="sumForm.Designer.vb">
       <DependentUpon>sumForm.vb</DependentUpon>
     </Compile>

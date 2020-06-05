@@ -8,9 +8,8 @@ Public Class mainForm
 
     Public sDir As String
     Public sFilePath As String
+    Public sFileName As String
 
-    Dim currentDate As Date = Date.Now
-    Dim lastRunDate As Date = My.Settings.lastRun
 
     Public fileNames As Collection
     Public filePath As Collection
@@ -34,44 +33,25 @@ Public Class mainForm
     '             === mainForm_Load ===
     '===================================================================================
     Private Sub mainForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-
-        '                   check expiration date
-        '-----------------------------------------------------------------------------------
-
-        Dim daysStayed As Int32 = My.Settings.expireDate.Subtract(currentDate).Days
-
-        menuItem_department.Enabled = False
-        menuItem_company.Enabled = False
-
-        If lastRunDate.Subtract(currentDate).Days > 0 Then
-            MsgBox("Check date and time settings!")
-            Me.Close()
-        Else
-            My.Settings.lastRun = currentDate
-            My.Settings.Save()
-        End If
-
-        If daysStayed > 0 Then
-            Return
-        Else
-            MsgBox("This app has expired!")
-            Me.Close()
-        End If
+        checkExpirationDate()
     End Sub
     '===================================================================================
     '             === Menu items ===
     '===================================================================================
 #Region "Menu items"
-
-    '                   loadDataBase
-    '-----------------------------------------------------------------------------------
+    '===================================================================================
+    '             === File => Open => Load database ===
+    '===================================================================================
     Private Sub FolderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FolderToolStripMenuItem.Click
-        backUp_db()
+
+        getNames()
         extractFiles()
+        load_db()
+
         iDepartment = 0
         iCategory = 0
         iCompany = 1
-        loadDataBaseFolder()
+
         menuItem_department.Enabled = True
         menuItem_company.Enabled = True
 
@@ -651,7 +631,8 @@ Public Class mainForm
         'backUp_db()
         'extractFiles()
         '-----------------------------------------------------------------------------------------
-
+        'getNames()
+        'extractFiles()
     End Sub
 
 
@@ -659,6 +640,7 @@ Public Class mainForm
     Private Sub mainForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
 
         compressFiles()
+        deleteTemp()
         MsgBox("Are you sure?")
 
     End Sub
