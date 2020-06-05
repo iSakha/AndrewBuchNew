@@ -2,6 +2,7 @@
 Imports OfficeOpenXml.Table
 Imports System.IO
 Imports System.Text.RegularExpressions
+Imports Ionic.Zip
 
 Module myFunc
 
@@ -115,8 +116,6 @@ Module myFunc
         ws = mainForm.i_pivot_wsDict(mainForm.iDepartment)(mainForm.iCategory)
 
         For k As Integer = 0 To ws.Tables.Count - 1
-
-
 
             xlTable = ws.Tables(k)
             c_xlTable = xlTable.Address.Columns
@@ -575,6 +574,8 @@ Module myFunc
 
         Excel.SaveAs(excelFile)
 
+        compressFiles()
+
     End Sub
 
     Sub backUp_db()
@@ -598,16 +599,53 @@ Module myFunc
         If (mainForm.FBD.ShowDialog() = DialogResult.OK) Then
             mainForm.sDir = mainForm.FBD.SelectedPath
         Else
-            Return
+            mainForm.Close()
         End If
 
-        For Each foundFile In My.Computer.FileSystem.GetFiles _
-        (mainForm.sDir, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.omdb")
-            Console.WriteLine(foundFile)
-        Next
-        MsgBox("Создаем резервную копию базы данных в папке BackUp", vbOKOnly + vbInformation)
-        My.Computer.FileSystem.CopyFile(foundFile, backUpFile)
+        'For Each foundFile In My.Computer.FileSystem.GetFiles _
+        '(mainForm.sDir, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.omdb")
+        '    Console.WriteLine(foundFile)
+        'Next
+        'MsgBox("Создаем резервную копию базы данных в папке BackUp", vbOKOnly + vbInformation)
+        'My.Computer.FileSystem.CopyFile(foundFile, backUpFile)
     End Sub
 
+    Sub extractFiles()
 
+        Using zip As ZipFile = ZipFile.Read(mainForm.sDir & "\DB.omdb")
+
+            zip.Password = "iSakha2836"
+            zip.ExtractAll(mainForm.sDir & "\Temp", ExtractExistingFileAction.OverwriteSilently)
+
+        End Using
+        mainForm.sDir = mainForm.sDir & "\Temp"
+    End Sub
+
+    Sub compressFiles()
+
+        Try
+
+            Dim sFolderPath As String = mainForm.sDir               ' Temp folder
+            Console.WriteLine(sFolderPath)
+
+            Dim Files() As String = IO.Directory.GetFiles(sFolderPath)
+
+            Using zip As ZipFile = New ZipFile
+
+                zip.Password = "iSakha2836"
+                zip.Encryption = Ionic.Zip.EncryptionAlgorithm.WinZipAes256
+                zip.AddDirectory(sFolderPath)
+                zip.Save(Directory.GetCurrentDirectory() & "\database\DB.omdb")
+
+            End Using
+
+        Catch
+        End Try
+
+    End Sub
+
+    Sub deleteTemp()
+        Dim sFolderPath As String = mainForm.sDir               ' Temp folder
+        My.Computer.FileSystem.DeleteDirectory(sFolderPath, FileIO.DeleteDirectoryOption.DeleteAllContents)
+    End Sub
 End Module

@@ -104,7 +104,7 @@ Public Class addForm
 
             dt = mainForm.dts.Tables(i)
             row = dt.Rows.Add()
-
+            Console.WriteLine(dt.Rows(dt.Rows.Count - 2).Item(0))
             row.Item(0) = dt.Rows(dt.Rows.Count - 2).Item(0) + 1
 
             For j As Integer = 0 To 7
@@ -129,8 +129,9 @@ Public Class addForm
         row.Item(8) = 0
         row.Item(9) = 0
         row.Item(10) = 0
-        row.Item(11) = row.Item(3) + row.Item(4) + row.Item(5) + row.Item(6) + row.Item(7)
+        row.Item(11) = row.Item(2) - (row.Item(3) + row.Item(4) + row.Item(5) + row.Item(6) + row.Item(7))
 
+        calcQuantity()
 
     End Sub
 

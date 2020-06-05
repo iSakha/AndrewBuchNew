@@ -23,13 +23,13 @@ Partial Class mainForm
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(mainForm))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -395,62 +395,62 @@ Partial Class mainForm
         '
         Me.item_lighting.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.item_movHeads, Me.item_strobes, Me.item_blinders, Me.item_arch, Me.item_LED, Me.item_smoke, Me.item_consoles, Me.item_intercom})
         Me.item_lighting.Name = "item_lighting"
-        Me.item_lighting.Size = New System.Drawing.Size(180, 22)
+        Me.item_lighting.Size = New System.Drawing.Size(175, 22)
         Me.item_lighting.Text = "Lighting"
         '
         'item_movHeads
         '
         Me.item_movHeads.Name = "item_movHeads"
-        Me.item_movHeads.Size = New System.Drawing.Size(180, 22)
+        Me.item_movHeads.Size = New System.Drawing.Size(151, 22)
         Me.item_movHeads.Text = "&Moving Heads"
         '
         'item_strobes
         '
         Me.item_strobes.Name = "item_strobes"
-        Me.item_strobes.Size = New System.Drawing.Size(180, 22)
+        Me.item_strobes.Size = New System.Drawing.Size(151, 22)
         Me.item_strobes.Text = "&Strobes"
         '
         'item_blinders
         '
         Me.item_blinders.Name = "item_blinders"
-        Me.item_blinders.Size = New System.Drawing.Size(180, 22)
+        Me.item_blinders.Size = New System.Drawing.Size(151, 22)
         Me.item_blinders.Text = "&Blinders"
         '
         'item_arch
         '
         Me.item_arch.Name = "item_arch"
-        Me.item_arch.Size = New System.Drawing.Size(180, 22)
+        Me.item_arch.Size = New System.Drawing.Size(151, 22)
         Me.item_arch.Text = "&Arch"
         '
         'item_LED
         '
         Me.item_LED.Name = "item_LED"
-        Me.item_LED.Size = New System.Drawing.Size(180, 22)
+        Me.item_LED.Size = New System.Drawing.Size(151, 22)
         Me.item_LED.Text = "&LED"
         '
         'item_smoke
         '
         Me.item_smoke.Name = "item_smoke"
-        Me.item_smoke.Size = New System.Drawing.Size(180, 22)
+        Me.item_smoke.Size = New System.Drawing.Size(151, 22)
         Me.item_smoke.Text = "&Smoke"
         '
         'item_consoles
         '
         Me.item_consoles.Name = "item_consoles"
-        Me.item_consoles.Size = New System.Drawing.Size(180, 22)
+        Me.item_consoles.Size = New System.Drawing.Size(151, 22)
         Me.item_consoles.Text = "&Lighting desks"
         '
         'item_intercom
         '
         Me.item_intercom.Name = "item_intercom"
-        Me.item_intercom.Size = New System.Drawing.Size(180, 22)
+        Me.item_intercom.Size = New System.Drawing.Size(151, 22)
         Me.item_intercom.Text = "&Intercoms"
         '
         'item_screen
         '
         Me.item_screen.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.item_modules, Me.item_servers, Me.item_controllers1, Me.item_controllers2, Me.item_projectors, Me.item_scr_construction, Me.item_lightDesks, Me.item_cameras})
         Me.item_screen.Name = "item_screen"
-        Me.item_screen.Size = New System.Drawing.Size(180, 22)
+        Me.item_screen.Size = New System.Drawing.Size(175, 22)
         Me.item_screen.Text = "Screen"
         '
         'item_modules
@@ -505,7 +505,7 @@ Partial Class mainForm
         '
         Me.item_commutation.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.item_pwrdistr, Me.item_comm, Me.item_pwrcomm, Me.item_rest})
         Me.item_commutation.Name = "item_commutation"
-        Me.item_commutation.Size = New System.Drawing.Size(180, 22)
+        Me.item_commutation.Size = New System.Drawing.Size(175, 22)
         Me.item_commutation.Text = "Commutation"
         '
         'item_pwrdistr
@@ -536,7 +536,7 @@ Partial Class mainForm
         '
         Me.item_truss_and_motors.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.item_truss30x30, Me.item_truss40x40, Me.item_truss50x60, Me.item_motors, Me.item_rigging, Me.item_diff, Me.item_completeConstr, Me.item_stagelifts})
         Me.item_truss_and_motors.Name = "item_truss_and_motors"
-        Me.item_truss_and_motors.Size = New System.Drawing.Size(180, 22)
+        Me.item_truss_and_motors.Size = New System.Drawing.Size(175, 22)
         Me.item_truss_and_motors.Text = "Trusses and motors"
         '
         'item_truss30x30
@@ -591,7 +591,7 @@ Partial Class mainForm
         '
         Me.item_construction.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.item_stageModules, Me.item_scaffold_J001, Me.item_scaffold_J004, Me.item_scaffold_steps, Me.item_barricades, Me.item_details})
         Me.item_construction.Name = "item_construction"
-        Me.item_construction.Size = New System.Drawing.Size(180, 22)
+        Me.item_construction.Size = New System.Drawing.Size(175, 22)
         Me.item_construction.Text = "Construction"
         '
         'item_stageModules
@@ -634,7 +634,7 @@ Partial Class mainForm
         '
         Me.item_sound.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.item_speakers, Me.item_ampracks, Me.item_monitors, Me.item_mixdesks, Me.item_dj_stage})
         Me.item_sound.Name = "item_sound"
-        Me.item_sound.Size = New System.Drawing.Size(180, 22)
+        Me.item_sound.Size = New System.Drawing.Size(175, 22)
         Me.item_sound.Text = "Sound"
         '
         'item_speakers
@@ -677,35 +677,36 @@ Partial Class mainForm
         'item_belimlight
         '
         Me.item_belimlight.Name = "item_belimlight"
-        Me.item_belimlight.Size = New System.Drawing.Size(180, 22)
+        Me.item_belimlight.Size = New System.Drawing.Size(169, 22)
         Me.item_belimlight.Text = "&Belimlight"
         '
         'item_PRLighting
         '
         Me.item_PRLighting.Name = "item_PRLighting"
-        Me.item_PRLighting.Size = New System.Drawing.Size(180, 22)
+        Me.item_PRLighting.Size = New System.Drawing.Size(169, 22)
         Me.item_PRLighting.Text = "&PRLighting"
         '
         'item_blackout
         '
         Me.item_blackout.Name = "item_blackout"
-        Me.item_blackout.Size = New System.Drawing.Size(180, 22)
+        Me.item_blackout.Size = New System.Drawing.Size(169, 22)
         Me.item_blackout.Text = "&Blackout"
         '
         'item_vision
         '
         Me.item_vision.Name = "item_vision"
-        Me.item_vision.Size = New System.Drawing.Size(180, 22)
+        Me.item_vision.Size = New System.Drawing.Size(169, 22)
         Me.item_vision.Text = "&Multivision"
         '
         'item_stage
         '
         Me.item_stage.Name = "item_stage"
-        Me.item_stage.Size = New System.Drawing.Size(180, 22)
+        Me.item_stage.Size = New System.Drawing.Size(169, 22)
         Me.item_stage.Text = "&Stage engineering"
         '
         'item_summary
         '
+        Me.item_summary.Enabled = False
         Me.item_summary.Name = "item_summary"
         Me.item_summary.Size = New System.Drawing.Size(180, 22)
         Me.item_summary.Text = "Pivot table"
@@ -730,6 +731,7 @@ Partial Class mainForm
         Me.btn_test.TabIndex = 3
         Me.btn_test.Text = "Test"
         Me.btn_test.UseVisualStyleBackColor = True
+        Me.btn_test.Visible = False
         '
         'GroupBox3
         '
@@ -1000,58 +1002,58 @@ Partial Class mainForm
         '
         'Column1
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Column1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Column1.DefaultCellStyle = DataGridViewCellStyle15
         Me.Column1.HeaderText = "Смета"
         Me.Column1.Name = "Column1"
         Me.Column1.ReadOnly = True
         '
         'Column2
         '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer))
-        Me.Column2.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer))
+        Me.Column2.DefaultCellStyle = DataGridViewCellStyle16
         Me.Column2.HeaderText = "Belimlight"
         Me.Column2.Name = "Column2"
         Me.Column2.ReadOnly = True
         '
         'Column3
         '
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(221, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(247, Byte), Integer))
-        Me.Column3.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(221, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.Column3.DefaultCellStyle = DataGridViewCellStyle17
         Me.Column3.HeaderText = "PRLighting"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
         '
         'Column4
         '
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer))
-        Me.Column4.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer))
+        Me.Column4.DefaultCellStyle = DataGridViewCellStyle18
         Me.Column4.HeaderText = "Blackout"
         Me.Column4.Name = "Column4"
         Me.Column4.ReadOnly = True
         '
         'Column5
         '
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(218, Byte), Integer))
-        Me.Column5.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(218, Byte), Integer))
+        Me.Column5.DefaultCellStyle = DataGridViewCellStyle19
         Me.Column5.HeaderText = "Multivision"
         Me.Column5.Name = "Column5"
         Me.Column5.ReadOnly = True
         '
         'Column6
         '
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.Column6.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Column6.DefaultCellStyle = DataGridViewCellStyle20
         Me.Column6.HeaderText = "Stage"
         Me.Column6.Name = "Column6"
         Me.Column6.ReadOnly = True
         '
         'Column7
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.Column7.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle21.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.Column7.DefaultCellStyle = DataGridViewCellStyle21
         Me.Column7.HeaderText = "Итого"
         Me.Column7.Name = "Column7"
         Me.Column7.ReadOnly = True

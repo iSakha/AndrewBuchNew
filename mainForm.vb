@@ -1,5 +1,6 @@
 ﻿Imports OfficeOpenXml
 Imports OfficeOpenXml.Table
+Imports System.ComponentModel
 Imports System.IO
 
 
@@ -65,7 +66,8 @@ Public Class mainForm
     '                   loadDataBase
     '-----------------------------------------------------------------------------------
     Private Sub FolderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FolderToolStripMenuItem.Click
-
+        backUp_db()
+        extractFiles()
         iDepartment = 0
         iCategory = 0
         iCompany = 1
@@ -357,7 +359,7 @@ Public Class mainForm
                 format_sumDGV()
             End If
         Next f
-
+        item_summary.Enabled = True
     End Sub
 
     Private Sub item_PRLighting_Click(sender As Object, e As EventArgs) Handles item_PRLighting.Click
@@ -374,7 +376,7 @@ Public Class mainForm
                 format_sumDGV()
             End If
         Next f
-
+        item_summary.Enabled = True
     End Sub
 
     Private Sub item_blackout_Click(sender As Object, e As EventArgs) Handles item_blackout.Click
@@ -391,7 +393,7 @@ Public Class mainForm
                 format_sumDGV()
             End If
         Next f
-
+        item_summary.Enabled = True
     End Sub
 
     Private Sub item_vision_Click(sender As Object, e As EventArgs) Handles item_vision.Click
@@ -408,7 +410,7 @@ Public Class mainForm
                 format_sumDGV()
             End If
         Next f
-
+        item_summary.Enabled = True
     End Sub
 
     Private Sub item_stage_Click(sender As Object, e As EventArgs) Handles item_stage.Click
@@ -425,13 +427,12 @@ Public Class mainForm
                 format_sumDGV()
             End If
         Next f
-
+        item_summary.Enabled = True
     End Sub
     Private Sub item_summary_Click(sender As Object, e As EventArgs) Handles item_summary.Click
 
-        'iCompany = 0
         sumForm.Show()
-        'create_dataset()
+
         sumForm.dgv_sum.DataSource = dts.Tables(0)
         sumForm.dgv_sum.Columns(8).Visible = False
         sumForm.dgv_sum.Columns(9).Visible = False
@@ -511,6 +512,7 @@ Public Class mainForm
 
     End Sub
 
+#Region "CRUD buttons"
     Private Sub btn_add_Click(sender As Object, e As EventArgs) Handles btn_add.Click
         delta = 1
         addForm.Show()
@@ -528,9 +530,29 @@ Public Class mainForm
         delta = -1
     End Sub
 
-    Private Sub btn_save_Click(sender As Object, e As EventArgs) Handles btn_save.Click, btn_cancel.Click
+    Private Sub btn_save_Click(sender As Object, e As EventArgs) Handles btn_save.Click
         saveButton(delta)
     End Sub
+    Private Sub btn_cancel_Click(sender As Object, e As EventArgs) Handles btn_cancel.Click
+        create_dataset()
+
+        Dim c As Color
+        Select Case iCompany
+            Case 1
+                c = Color.FromArgb(252, 228, 214)
+            Case 2
+                c = Color.FromArgb(221, 235, 247)
+            Case 3
+                c = Color.FromArgb(237, 237, 237)
+            Case 4
+                c = Color.FromArgb(226, 239, 218)
+            Case 5
+                c = Color.FromArgb(237, 226, 246)
+        End Select
+        dgv.DataSource = dts.Tables(iCompany)
+        format_dgv_dataset(c)
+    End Sub
+#End Region
 
     '===================================================================================
     '             === Format sumDGV ===
@@ -590,6 +612,8 @@ Public Class mainForm
         sumForm.dgv_sum.Columns(10).Visible = False
 
     End Sub
+
+
     '===================================================================================      
     '                === Test button ===
     '===================================================================================
@@ -624,10 +648,18 @@ Public Class mainForm
         'sumForm.dgv_sum.Columns(0).Visible = False
 
         '-----------------------------------------------------------------------------------------
-        backUp_db()
+        'backUp_db()
+        'extractFiles()
         '-----------------------------------------------------------------------------------------
 
     End Sub
-#End Region
 
+
+#End Region
+    Private Sub mainForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+
+        compressFiles()
+        MsgBox("Are you sure?")
+
+    End Sub
 End Class
