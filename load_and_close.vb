@@ -146,7 +146,7 @@ Module load_and_close
 
             Dim ws As ExcelWorksheet
             Dim excelFile = New FileInfo(mainForm.sFilePath)
-
+            Console.WriteLine(mainForm.sFilePath)
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial
             Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
 

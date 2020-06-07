@@ -496,6 +496,7 @@ Public Class mainForm
     Private Sub btn_add_Click(sender As Object, e As EventArgs) Handles btn_add.Click
         delta = 1
         addForm.Show()
+        blockButtons()
     End Sub
 
     Private Sub btn_update_Click(sender As Object, e As EventArgs) Handles btn_update.Click
@@ -503,15 +504,20 @@ Public Class mainForm
         calcQuantity()
         format_sumDGV()
         delta = 0
+        blockButtons()
     End Sub
 
     Private Sub btn_delete_Click(sender As Object, e As EventArgs) Handles btn_delete.Click
         deleteRow()
         delta = -1
+        blockButtons()
     End Sub
 
     Private Sub btn_save_Click(sender As Object, e As EventArgs) Handles btn_save.Click
         saveButton(delta)
+        load_db()
+        unBlockButtons()
+
     End Sub
     Private Sub btn_cancel_Click(sender As Object, e As EventArgs) Handles btn_cancel.Click
         create_dataset()
@@ -531,6 +537,7 @@ Public Class mainForm
         End Select
         dgv.DataSource = dts.Tables(iCompany)
         format_dgv_dataset(c)
+        unBlockButtons()
     End Sub
 #End Region
 
@@ -633,6 +640,8 @@ Public Class mainForm
         '-----------------------------------------------------------------------------------------
         'getNames()
         'extractFiles()
+        'formatXl_table()
+        exportDataset()
     End Sub
 
 

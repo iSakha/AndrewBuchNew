@@ -319,22 +319,6 @@ Module myFunc
         End If
     End Sub
 
-
-    'Sub writeZeroInQtyTxt()
-    '    If mainForm.txt_qty.Text = "" Then
-    '        mainForm.txt_qty.Text = 0
-    '    End If
-    '    If mainForm.txt_qty1.Text = "" Then
-    '        mainForm.txt_qty1.Text = 0
-    '    End If
-    '    If mainForm.txt_qty2.Text = "" Then
-    '        mainForm.txt_qty2.Text = 0
-    '    End If
-    '    If mainForm.txt_qty3.Text = "" Then
-    '        mainForm.txt_qty3.Text = 0
-    '    End If
-    'End Sub
-
     '===================================================================================
     '             === UPDATE data in DB ===
     '===================================================================================
@@ -459,12 +443,12 @@ Module myFunc
 
                     xlTable = ws.Tables(i)
                     oldAddr = xlTable.Address
+                    xlTable.Range.Clear()
                     newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row + _delta, oldAddr.End.Column)
                     xlTable.TableXml.InnerXml = xlTable.TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
 
                     startCellAddress = xlTable.Range.Start.Address
 
-                    xlTable.Range.Clear()
                     ws.Cells(startCellAddress).LoadFromDataTable(dt, True)
 
                 Next i
@@ -484,45 +468,178 @@ Module myFunc
 
         End Select
 
+        'formatXl_table()
+
         Excel.SaveAs(excelFile)
 
         compressFiles()
 
     End Sub
+    '===================================================================================
+    '             === block CDUDbuttons ===
+    '===================================================================================
+    Sub blockButtons()
 
-    'Sub backUp_db()
+        mainForm.btn_add.Enabled = False
+        mainForm.btn_update.Enabled = False
+        mainForm.btn_delete.Enabled = False
+        mainForm.btn_next.Enabled = False
+        mainForm.btn_prev.Enabled = False
 
-    '    Dim folderName, backUpFolder, backUpFile, foundFile As String
-    '    Dim format As String = ("yyy MM dd HH':'mm':'ss")
-    '    Dim myDate As DateTime = DateTime.Now
-    '    folderName = myDate.ToString(format)
+        mainForm.menuItem_department.Enabled = False
+        mainForm.menuItem_company.Enabled = False
 
-    '    Console.WriteLine(folderName)
-    '    folderName = Regex.Replace(folderName, "\D", "")            ' timestamp name
-    '    Console.WriteLine(folderName)
+        mainForm.btn_save.FlatStyle = FlatStyle.Flat
+        mainForm.btn_cancel.FlatStyle = FlatStyle.Flat
+    End Sub
+    '===================================================================================
+    '             === unblock CDUDbuttons ===
+    '===================================================================================
+    Sub unBlockButtons()
 
-    '    Console.WriteLine(Directory.GetCurrentDirectory())
-    '    backUpFolder = Directory.GetCurrentDirectory() & "\BackUp"
-    '    '   Create folder with timestamp name inside backUp folder
-    '    My.Computer.FileSystem.CreateDirectory(backUpFolder & "\" & folderName)
-    '    backUpFile = Directory.GetCurrentDirectory() & "\BackUp\" & folderName & "\DB.ombckp"
+        mainForm.btn_add.Enabled = True
+        mainForm.btn_update.Enabled = True
+        mainForm.btn_delete.Enabled = True
+        mainForm.btn_next.Enabled = True
+        mainForm.btn_prev.Enabled = True
 
-    '    mainForm.FBD.SelectedPath = Directory.GetCurrentDirectory()
-    '    If (mainForm.FBD.ShowDialog() = DialogResult.OK) Then
-    '        mainForm.sDir = mainForm.FBD.SelectedPath
-    '    Else
-    '        mainForm.Close()
-    '    End If
+        mainForm.menuItem_department.Enabled = True
+        mainForm.menuItem_company.Enabled = True
 
-    '    'For Each foundFile In My.Computer.FileSystem.GetFiles _
-    '    '(mainForm.sDir, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.omdb")
-    '    '    Console.WriteLine(foundFile)
-    '    'Next
-    '    'MsgBox("Создаем резервную копию базы данных в папке BackUp", vbOKOnly + vbInformation)
-    '    'My.Computer.FileSystem.CopyFile(foundFile, backUpFile)
-    'End Sub
+        mainForm.btn_save.FlatStyle = FlatStyle.Standard
+        mainForm.btn_cancel.FlatStyle = FlatStyle.Standard
+
+    End Sub
+
+    '===================================================================================
+    '             === Format Excel table ===
+    '===================================================================================
+
+    Sub formatXl_table(_sPath As String, _worksheetNumber As Integer)
+
+        Dim excelFile = New FileInfo(_sPath)
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+        Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
+
+        Dim rngHeader, rngSide, rngTbl_0(5) As ExcelRange
+        Dim startRow, startColumn, endRow As Integer
+        Dim sideBackColor As Color = Color.FromArgb(242, 245, 245)
+        Dim ws As ExcelWorksheet
+        ws = Excel.Workbook.Worksheets(_worksheetNumber)
+
+        Dim col() As Color
+
+        col = {Color.FromArgb(252, 228, 214), Color.FromArgb(221, 235, 247), Color.FromArgb(237, 237, 237),
+            Color.FromArgb(226, 239, 218), Color.FromArgb(237, 226, 246)}
+
+        Dim i As Integer = 0
+
+        For Each tbl As ExcelTable In ws.Tables
+
+            startRow = tbl.Address.Start.Row
+            endRow = tbl.Address.End.Row
+            startColumn = tbl.Address.Start.Column
+
+            rngHeader = ws.Cells(startRow, startColumn + 3, startRow, startColumn + 8)
+
+            rngSide = ws.Cells(startRow + 1, startColumn + 1, endRow, startColumn + 2)
 
 
+            rngTbl_0(0) = ws.Cells(startRow, startColumn + 3, endRow, startColumn + 3)
+            rngTbl_0(1) = ws.Cells(startRow, startColumn + 4, endRow, startColumn + 4)
+            rngTbl_0(2) = ws.Cells(startRow, startColumn + 5, endRow, startColumn + 5)
+            rngTbl_0(3) = ws.Cells(startRow, startColumn + 6, endRow, startColumn + 6)
+            rngTbl_0(4) = ws.Cells(startRow, startColumn + 7, endRow, startColumn + 7)
 
+            rngSide.Style.Fill.PatternType = Style.ExcelFillStyle.Solid
+            rngSide.Style.Fill.BackgroundColor.SetColor(sideBackColor)
+
+            rngSide.Style.Font.Size = 11
+            rngSide.Style.Font.Italic = True
+            rngSide.Style.Font.Bold = True
+            rngSide.Style.Font.Name = "Calibri"
+
+            Select Case i
+                Case 0
+
+                    For j As Integer = 0 To 4
+                        rngTbl_0(j).Style.Fill.PatternType = Style.ExcelFillStyle.Solid
+                        rngTbl_0(j).Style.Fill.BackgroundColor.SetColor(col(j))
+                    Next j
+
+                Case <> 0
+
+                    rngHeader.Style.Fill.PatternType = Style.ExcelFillStyle.Solid
+                    rngHeader.Style.Fill.BackgroundColor.SetColor(col(i - 1))
+
+            End Select
+
+            i = i + 1
+
+        Next tbl
+
+        Excel.SaveAs(excelFile)
+
+    End Sub
+    '===================================================================================
+    '             === Export dataset ===
+    '===================================================================================
+    Sub exportDataset()
+
+        Dim columnWidth(11) As Integer
+        columnWidth = {4, 52, 9, 42, 25, 37, 11, 44, 11, 17, 13}
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+        Dim Excel As ExcelPackage = New ExcelPackage()
+
+        Dim ws As ExcelWorksheet
+        Dim xlTable As ExcelTable
+        Dim xlTableName As String
+        Dim startRow(6) As Integer
+        Dim rng As ExcelRange
+        Dim startColumn, endRow, endColumn, tiltShift As Integer
+
+        tiltShift = 11
+        startColumn = 3
+        startRow(6) = New Integer()
+
+        startRow(0) = 3
+        endRow = startRow(0) + mainForm.dts.Tables(0).Rows.Count
+        startRow(1) = endRow + tiltShift
+        endRow = startRow(1) + mainForm.dts.Tables(1).Rows.Count
+        startRow(2) = endRow + tiltShift
+        endRow = startRow(2) + mainForm.dts.Tables(2).Rows.Count
+        startRow(3) = endRow + tiltShift
+        endRow = startRow(3) + mainForm.dts.Tables(2).Rows.Count
+        startRow(4) = endRow + tiltShift
+        endRow = startRow(4) + mainForm.dts.Tables(2).Rows.Count
+        startRow(5) = endRow + tiltShift
+
+        ws = Excel.Workbook.Worksheets.Add("test")
+
+        For k As Integer = 0 To 10
+            ws.Column(k + 3).Width = columnWidth(k)
+        Next k
+
+        For i As Integer = 0 To mainForm.dts.Tables.Count - 1
+
+            endRow = startRow(i) + mainForm.dts.Tables(i).Rows.Count
+            endColumn = startColumn + mainForm.dts.Tables(i).Columns.Count - 1
+            xlTableName = mainForm.dts.Tables(i).TableName
+            rng = ws.Cells(startRow(i), startColumn, endRow, endColumn)
+
+            xlTable = ws.Tables.Add(rng, xlTableName)
+            ws.Cells("C" & startRow(i)).LoadFromDataTable(mainForm.dts.Tables(i), True)
+            xlTable.TableStyle = TableStyles.Light15
+
+        Next i
+
+        Dim exportDir As String = Directory.GetCurrentDirectory() & "\ExcelExport"
+        Dim sPath As String = exportDir & "\ExcelExport_DB.xlsx"
+
+        Excel.SaveAs(New FileInfo(sPath))
+
+        formatXl_table(sPath, 0)
+
+    End Sub
 
 End Module
