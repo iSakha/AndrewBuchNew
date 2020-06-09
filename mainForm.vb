@@ -56,6 +56,12 @@ Public Class mainForm
         menuItem_company.Enabled = True
 
     End Sub
+    '===================================================================================
+    '             === Export to Excel ===
+    '===================================================================================
+    Private Sub ExportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToolStripMenuItem.Click
+        exportExcel.Show()
+    End Sub
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
     End Sub
@@ -327,7 +333,7 @@ Public Class mainForm
     Private Sub item_belimlight_Click(sender As Object, e As EventArgs) Handles item_belimlight.Click
 
         iCompany = 1
-        create_dataset()
+        create_dataset(iDepartment, iCompany)
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(252, 228, 214)
         dgv.DataSource = dts.Tables(iCompany)
@@ -344,7 +350,7 @@ Public Class mainForm
 
     Private Sub item_PRLighting_Click(sender As Object, e As EventArgs) Handles item_PRLighting.Click
         iCompany = 2
-        create_dataset()
+        create_dataset(iDepartment, iCompany)
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(221, 235, 247)
         dgv.DataSource = dts.Tables(iCompany)
@@ -361,7 +367,7 @@ Public Class mainForm
 
     Private Sub item_blackout_Click(sender As Object, e As EventArgs) Handles item_blackout.Click
         iCompany = 3
-        create_dataset()
+        create_dataset(iDepartment, iCompany)
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(237, 237, 237)
         dgv.DataSource = dts.Tables(iCompany)
@@ -378,7 +384,7 @@ Public Class mainForm
 
     Private Sub item_vision_Click(sender As Object, e As EventArgs) Handles item_vision.Click
         iCompany = 4
-        create_dataset()
+        create_dataset(iDepartment, iCompany)
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(226, 239, 218)
         dgv.DataSource = dts.Tables(iCompany)
@@ -395,7 +401,7 @@ Public Class mainForm
 
     Private Sub item_stage_Click(sender As Object, e As EventArgs) Handles item_stage.Click
         iCompany = 5
-        create_dataset()
+        create_dataset(iDepartment, iCompany)
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(237, 226, 246)
         dgv.DataSource = dts.Tables(iCompany)
@@ -520,7 +526,7 @@ Public Class mainForm
 
     End Sub
     Private Sub btn_cancel_Click(sender As Object, e As EventArgs) Handles btn_cancel.Click
-        create_dataset()
+        create_dataset(iDepartment, iCompany)
 
         Dim c As Color
         Select Case iCompany
@@ -601,6 +607,8 @@ Public Class mainForm
     End Sub
 
 
+
+
     '===================================================================================      
     '                === Test button ===
     '===================================================================================
@@ -641,7 +649,10 @@ Public Class mainForm
         'getNames()
         'extractFiles()
         'formatXl_table()
-        exportDataset()
+        'For i As Integer = 0 To i_pivot_wsDict.Count - 1
+        '    Console.WriteLine(i_pivot_wsDict(iDepartment)(i).Name)
+        'Next i
+        exportDataset(iDepartment)
     End Sub
 
 

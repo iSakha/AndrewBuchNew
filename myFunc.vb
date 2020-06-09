@@ -11,7 +11,7 @@ Module myFunc
     '             === Create dataset ===
     '===================================================================================
 
-    Sub create_dataset()
+    Sub create_dataset(_iDEpartment As Integer, _iCategory As Integer)
 
         Dim dt As DataTable
 
@@ -25,7 +25,7 @@ Module myFunc
 
         mainForm.dts = New DataSet
 
-        ws = mainForm.i_pivot_wsDict(mainForm.iDepartment)(mainForm.iCategory)
+        ws = mainForm.i_pivot_wsDict(_iDEpartment)(_iCategory)
 
         For k As Integer = 0 To ws.Tables.Count - 1
 
@@ -146,6 +146,7 @@ Module myFunc
 
             mainForm.dts.Tables.Add(dt)
         Next k
+
     End Sub
 
     '===================================================================================
@@ -515,11 +516,11 @@ Module myFunc
     '             === Format Excel table ===
     '===================================================================================
 
-    Sub formatXl_table(_sPath As String, _worksheetNumber As Integer)
+    Sub formatXl_table(_Excel As Object, _excelFile As Object, _sPath As String, _worksheetNumber As Integer)
 
-        Dim excelFile = New FileInfo(_sPath)
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial
-        Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
+        'Dim excelFile = New FileInfo(_sPath)
+        'ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+        'Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
 
         Dim rngHeader, rngSide, rngTbl_0(5) As ExcelRange
 
@@ -534,8 +535,9 @@ Module myFunc
         Dim startRow, startColumn, endRow As Integer
         Dim sideBackColor As Color = Color.FromArgb(242, 245, 245)
         Dim ws As ExcelWorksheet
-        ws = Excel.Workbook.Worksheets(_worksheetNumber)
-
+        ws = _Excel.Workbook.Worksheets(_worksheetNumber)
+        'ws = Excel.Workbook.Worksheets(0)
+        'Console.WriteLine(Excel.Workbook.Worksheets.Count)
         Dim col() As Color
 
         col = {Color.FromArgb(252, 228, 214), Color.FromArgb(221, 235, 247), Color.FromArgb(237, 237, 237),
@@ -598,18 +600,20 @@ Module myFunc
 
         Next tbl
 
-        Excel.SaveAs(excelFile)
+        _Excel.SaveAs(_excelFile)
 
     End Sub
     '===================================================================================
     '             === Export dataset ===
     '===================================================================================
-    Sub exportDataset()
+    Sub exportDataset(_iDepartment As Integer)
 
         Dim columnWidth(12) As Integer
         columnWidth = {4, 52, 9, 42, 25, 37, 11, 44, 13, 13, 13, 13}
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial
         Dim Excel As ExcelPackage = New ExcelPackage()
+        Dim objExcel, objExcelFile As Object
+        objExcel = Excel
 
         Dim ws As ExcelWorksheet
         Dim xlTable As ExcelTable
@@ -617,49 +621,56 @@ Module myFunc
         Dim startRow(6) As Integer
         Dim rng As ExcelRange
         Dim startColumn, endRow, endColumn, tiltShift As Integer
-
-        tiltShift = 5
-        startColumn = 3
-        startRow(6) = New Integer()
-
-        startRow(0) = 3
-        endRow = startRow(0) + mainForm.dts.Tables(0).Rows.Count
-        startRow(1) = endRow + tiltShift
-        endRow = startRow(1) + mainForm.dts.Tables(1).Rows.Count
-        startRow(2) = endRow + tiltShift
-        endRow = startRow(2) + mainForm.dts.Tables(2).Rows.Count
-        startRow(3) = endRow + tiltShift
-        endRow = startRow(3) + mainForm.dts.Tables(2).Rows.Count
-        startRow(4) = endRow + tiltShift
-        endRow = startRow(4) + mainForm.dts.Tables(2).Rows.Count
-        startRow(5) = endRow + tiltShift
-
-        ws = Excel.Workbook.Worksheets.Add("test")
-
-        For k As Integer = 0 To 11
-            ws.Column(k + 3).Width = columnWidth(k)
-        Next k
-
-        For i As Integer = 0 To mainForm.dts.Tables.Count - 1
-
-            endRow = startRow(i) + mainForm.dts.Tables(i).Rows.Count
-            endColumn = startColumn + mainForm.dts.Tables(i).Columns.Count - 1
-            xlTableName = mainForm.dts.Tables(i).TableName
-            rng = ws.Cells(startRow(i), startColumn, endRow, endColumn)
-
-            xlTable = ws.Tables.Add(rng, xlTableName)
-            ws.Cells("C" & startRow(i)).LoadFromDataTable(mainForm.dts.Tables(i), True)
-            xlTable.TableStyle = TableStyles.Light15
-
-        Next i
+        Dim exportSheetName As String
+        Dim exportFileName() As String = {"LightingExport", "ScreenExport", "CommutationExport" _
+        , "Truss_and_motorsExport", "ConstructionExport", "SoundExport"}
 
         Dim exportDir As String = Directory.GetCurrentDirectory() & "\ExcelExport"
-        Dim sPath As String = exportDir & "\ExcelExport_DB.xlsx"
+        Dim sPath As String = exportDir & "\" & exportFileName(_iDepartment) & ".xlsx"
 
+        'Console.WriteLine(mainForm.i_pivot_wsDict(_iDepartment).Count - 1)
+
+        For j As Integer = 0 To mainForm.i_pivot_wsDict(_iDepartment).Count - 1
+            create_dataset(_iDepartment, j)
+            tiltShift = 5
+            startColumn = 3
+            startRow(6) = New Integer()
+
+            startRow(0) = 3
+            endRow = startRow(0) + mainForm.dts.Tables(0).Rows.Count
+            startRow(1) = endRow + tiltShift
+            endRow = startRow(1) + mainForm.dts.Tables(1).Rows.Count
+            startRow(2) = endRow + tiltShift
+            endRow = startRow(2) + mainForm.dts.Tables(2).Rows.Count
+            startRow(3) = endRow + tiltShift
+            endRow = startRow(3) + mainForm.dts.Tables(2).Rows.Count
+            startRow(4) = endRow + tiltShift
+            endRow = startRow(4) + mainForm.dts.Tables(2).Rows.Count
+            startRow(5) = endRow + tiltShift
+
+            exportSheetName = mainForm.i_pivot_wsDict(_iDepartment)(j).Name
+            ws = Excel.Workbook.Worksheets.Add(exportSheetName)
+
+            For k As Integer = 0 To 11
+                ws.Column(k + 3).Width = columnWidth(k)
+            Next k
+
+            For i As Integer = 0 To mainForm.dts.Tables.Count - 1
+
+                endRow = startRow(i) + mainForm.dts.Tables(i).Rows.Count
+                endColumn = startColumn + mainForm.dts.Tables(i).Columns.Count - 1
+                xlTableName = mainForm.dts.Tables(i).TableName
+                rng = ws.Cells(startRow(i), startColumn, endRow, endColumn)
+
+                xlTable = ws.Tables.Add(rng, xlTableName)
+                ws.Cells("C" & startRow(i)).LoadFromDataTable(mainForm.dts.Tables(i), True)
+                xlTable.TableStyle = TableStyles.Light15
+
+            Next i
+            objExcelFile = New FileInfo(sPath)
+            formatXl_table(objExcel, objExcelFile, sPath, j)
+        Next j
         Excel.SaveAs(New FileInfo(sPath))
-
-        formatXl_table(sPath, 0)
-
     End Sub
 
 End Module

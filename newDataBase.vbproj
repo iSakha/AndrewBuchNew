@@ -105,6 +105,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="exportExcel.Designer.vb">
+      <DependentUpon>exportExcel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="exportExcel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="load_and_close.vb" />
     <Compile Include="sumForm.Designer.vb">
       <DependentUpon>sumForm.vb</DependentUpon>
@@ -138,6 +144,9 @@
   <ItemGroup>
     <EmbeddedResource Include="addForm.resx">
       <DependentUpon>addForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="exportExcel.resx">
+      <DependentUpon>exportExcel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sumForm.resx">
       <DependentUpon>sumForm.vb</DependentUpon>

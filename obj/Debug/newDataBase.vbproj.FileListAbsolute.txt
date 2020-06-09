@@ -55,3 +55,4 @@ C:\Users\123\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Deb
 C:\Users\123\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.exe
 C:\Users\123\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.xml
 C:\Users\123\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.pdb
+C:\Users\123\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\newDataBase\obj\Debug\newDataBase.exportExcel.resources
