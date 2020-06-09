@@ -73,7 +73,7 @@ Module myFunc
 
                         row = dt.Rows.Add()
 
-                        For j = 0 To c_xlTable - 2
+                        For j = 0 To c_xlTable - 1
 
                             row.Item(j) = rng.Value(i, j)
 
@@ -522,6 +522,15 @@ Module myFunc
         Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
 
         Dim rngHeader, rngSide, rngTbl_0(5) As ExcelRange
+
+        Dim rngTbl_0_to_center As ExcelRange                ' For summary table
+
+        Dim rngTbl_to_center As ExcelRange                  ' For company's table
+        Dim rngTbl_to_center_1 As ExcelRange
+        Dim rngTbl_to_center_2 As ExcelRange
+        Dim rngTbl_to_center_3 As ExcelRange
+
+
         Dim startRow, startColumn, endRow As Integer
         Dim sideBackColor As Color = Color.FromArgb(242, 245, 245)
         Dim ws As ExcelWorksheet
@@ -544,12 +553,18 @@ Module myFunc
 
             rngSide = ws.Cells(startRow + 1, startColumn + 1, endRow, startColumn + 2)
 
+            rngTbl_to_center = ws.Cells(startRow, startColumn + 2, endRow, startColumn + 2)
+            rngTbl_to_center_1 = ws.Cells(startRow, startColumn + 4, endRow, startColumn + 4)
+            rngTbl_to_center_2 = ws.Cells(startRow, startColumn + 6, endRow, startColumn + 6)
+            rngTbl_to_center_3 = ws.Cells(startRow, startColumn + 8, endRow, startColumn + 8)
 
             rngTbl_0(0) = ws.Cells(startRow, startColumn + 3, endRow, startColumn + 3)
             rngTbl_0(1) = ws.Cells(startRow, startColumn + 4, endRow, startColumn + 4)
             rngTbl_0(2) = ws.Cells(startRow, startColumn + 5, endRow, startColumn + 5)
             rngTbl_0(3) = ws.Cells(startRow, startColumn + 6, endRow, startColumn + 6)
             rngTbl_0(4) = ws.Cells(startRow, startColumn + 7, endRow, startColumn + 7)
+
+            rngTbl_0_to_center = ws.Cells(startRow, startColumn + 2, endRow, startColumn + 11)
 
             rngSide.Style.Fill.PatternType = Style.ExcelFillStyle.Solid
             rngSide.Style.Fill.BackgroundColor.SetColor(sideBackColor)
@@ -565,12 +580,17 @@ Module myFunc
                     For j As Integer = 0 To 4
                         rngTbl_0(j).Style.Fill.PatternType = Style.ExcelFillStyle.Solid
                         rngTbl_0(j).Style.Fill.BackgroundColor.SetColor(col(j))
+                        rngTbl_0_to_center.Style.HorizontalAlignment = Style.ExcelHorizontalAlignment.Center
                     Next j
 
                 Case <> 0
 
                     rngHeader.Style.Fill.PatternType = Style.ExcelFillStyle.Solid
                     rngHeader.Style.Fill.BackgroundColor.SetColor(col(i - 1))
+                    rngTbl_to_center.Style.HorizontalAlignment = Style.ExcelHorizontalAlignment.Center
+                    rngTbl_to_center_1.Style.HorizontalAlignment = Style.ExcelHorizontalAlignment.Center
+                    rngTbl_to_center_2.Style.HorizontalAlignment = Style.ExcelHorizontalAlignment.Center
+                    rngTbl_to_center_3.Style.HorizontalAlignment = Style.ExcelHorizontalAlignment.Center
 
             End Select
 
@@ -586,8 +606,8 @@ Module myFunc
     '===================================================================================
     Sub exportDataset()
 
-        Dim columnWidth(11) As Integer
-        columnWidth = {4, 52, 9, 42, 25, 37, 11, 44, 11, 17, 13}
+        Dim columnWidth(12) As Integer
+        columnWidth = {4, 52, 9, 42, 25, 37, 11, 44, 13, 13, 13, 13}
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial
         Dim Excel As ExcelPackage = New ExcelPackage()
 
@@ -598,7 +618,7 @@ Module myFunc
         Dim rng As ExcelRange
         Dim startColumn, endRow, endColumn, tiltShift As Integer
 
-        tiltShift = 11
+        tiltShift = 5
         startColumn = 3
         startRow(6) = New Integer()
 
@@ -616,7 +636,7 @@ Module myFunc
 
         ws = Excel.Workbook.Worksheets.Add("test")
 
-        For k As Integer = 0 To 10
+        For k As Integer = 0 To 11
             ws.Column(k + 3).Width = columnWidth(k)
         Next k
 
