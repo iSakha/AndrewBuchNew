@@ -52,7 +52,7 @@ Module load_and_close
         Try
             For Each foundFile In My.Computer.FileSystem.GetFiles _
         (mainForm.sDir, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.omdb")
-                Console.WriteLine(foundFile)
+                'Console.WriteLine(foundFile)
             Next
             MsgBox("Создаем резервную копию базы данных в папке BackUp", vbOKOnly + vbInformation)
             My.Computer.FileSystem.CopyFile(foundFile, backUpFile)
@@ -112,7 +112,7 @@ Module load_and_close
 
             Dim ws As ExcelWorksheet
             Dim excelFile = New FileInfo(mainForm.sFilePath)
-            Console.WriteLine(mainForm.sFilePath)
+            'Console.WriteLine(mainForm.sFilePath)
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial
             Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
 
@@ -200,6 +200,7 @@ Module load_and_close
 
         mainForm.OFD.InitialDirectory = Directory.GetCurrentDirectory()
         mainForm.OFD.Title = "Select .omdb file"
+        mainForm.OFD.Filter = "Database files|*.omdb"
         '   open file using open file dialog
         If mainForm.OFD.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             mainForm.sFilePath = mainForm.OFD.FileName
@@ -221,7 +222,19 @@ Module load_and_close
     End Function
 
     Sub loadFromBackup()
+        Dim backUpFile, newDB_file As String
+        newDB_file = Directory.GetCurrentDirectory() & "\database\DB_fromBackUp.omdb"
+        mainForm.OFD.InitialDirectory = Directory.GetCurrentDirectory()
+        mainForm.OFD.Title = "Select .ombckp file"
+        mainForm.OFD.Filter = "BackUp files|*.ombckp"
 
+        '   copy and rename file to db location
+        If mainForm.OFD.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+            backUpFile = mainForm.OFD.FileName
+            My.Computer.FileSystem.CopyFile(backUpFile, newDB_file)
+        Else
+            mainForm.Close()
+        End If
     End Sub
 
 End Module

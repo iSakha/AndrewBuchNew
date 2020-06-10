@@ -62,6 +62,12 @@ Public Class mainForm
 
     End Sub
     '===================================================================================
+    '             === File => Open => Load from backup ===
+    '===================================================================================
+    Private Sub FileToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles FileToolStripMenuItem1.Click
+        loadFromBackup()
+    End Sub
+    '===================================================================================
     '             === Export to Excel ===
     '===================================================================================
     Private Sub ExportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToolStripMenuItem.Click
@@ -610,9 +616,6 @@ Public Class mainForm
         sumForm.dgv_sum.Columns(10).Visible = False
 
     End Sub
-
-
-
 
     '===================================================================================      
     '                === Test button ===
