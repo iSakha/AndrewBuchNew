@@ -621,11 +621,20 @@ Module myFunc
         Dim startRow(6) As Integer
         Dim rng As ExcelRange
         Dim startColumn, endRow, endColumn, tiltShift As Integer
-        Dim exportSheetName As String
+        Dim exportSheetName, timeStampDir As String
         Dim exportFileName() As String = {"LightingExport", "ScreenExport", "CommutationExport" _
         , "Truss_and_motorsExport", "ConstructionExport", "SoundExport"}
 
-        Dim exportDir As String = Directory.GetCurrentDirectory() & "\ExcelExport"
+        Dim format As String = ("yyy MM dd HH':'mm':'ss")
+        Dim myDate As DateTime = DateTime.Now
+
+        timeStampDir = myDate.ToString(format)
+
+        timeStampDir = Regex.Replace(timeStampDir, "\D", "")            ' timestamp name
+
+        My.Computer.FileSystem.CreateDirectory(Directory.GetCurrentDirectory() & "\ExcelExport\" & timeStampDir)
+
+        Dim exportDir As String = Directory.GetCurrentDirectory() & "\ExcelExport\" & timeStampDir
         Dim sPath As String = exportDir & "\" & exportFileName(_iDepartment) & ".xlsx"
 
         'Console.WriteLine(mainForm.i_pivot_wsDict(_iDepartment).Count - 1)

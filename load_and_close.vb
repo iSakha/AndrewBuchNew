@@ -38,41 +38,7 @@ Module load_and_close
     '             === get file names  and dir names ===
     '===================================================================================
     Sub getNames()
-
-        Dim folderName, backUpFolder, backUpFile, foundFile As String
-
-        Dim format As String = ("yyy MM dd HH':'mm':'ss")
-        Dim myDate As DateTime = DateTime.Now
-
-        folderName = myDate.ToString(format)
-
-        folderName = Regex.Replace(folderName, "\D", "")            ' timestamp name
-        backUpFolder = Directory.GetCurrentDirectory() & "\BackUp"
-        '   Create folder with timestamp name inside backUp folder
-        My.Computer.FileSystem.CreateDirectory(backUpFolder & "\" & folderName)
-
-        mainForm.sDir = Directory.GetCurrentDirectory()
-
-        mainForm.OFD.InitialDirectory = Directory.GetCurrentDirectory()
-        mainForm.OFD.Title = "Select .omdb file"
-        '   open file using open file dialog
-        If mainForm.OFD.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-            mainForm.sFilePath = mainForm.OFD.FileName
-        Else
-            mainForm.Close()
-        End If
-
-        Dim testArray() As String = Split(mainForm.sFilePath, "\")
-        Dim sFileName As String = testArray(testArray.Length - 1)
-        mainForm.sDir = ""
-        For i As Integer = 0 To testArray.Length - 2
-            If i < testArray.Length - 2 Then
-                mainForm.sDir = mainForm.sDir & testArray(i) & "\"
-            Else
-                mainForm.sDir = mainForm.sDir & testArray(i)
-            End If
-        Next i
-        createBackup(folderName)
+        createBackup(timeStampFolder())     ' timeStampFolder() - function returns "folderName"
     End Sub
     '===================================================================================
     '             === create backup ===
@@ -213,5 +179,45 @@ Module load_and_close
         Catch
         End Try
     End Sub
+    '===================================================================================
+    '             === My Functions ===
+    '===================================================================================
+    Function timeStampFolder()
+
+        Dim folderName, backUpFolder As String
+
+        Dim format As String = ("yyy MM dd HH':'mm':'ss")
+        Dim myDate As DateTime = DateTime.Now
+
+        folderName = myDate.ToString(format)
+
+        folderName = Regex.Replace(folderName, "\D", "")            ' timestamp name
+        backUpFolder = Directory.GetCurrentDirectory() & "\BackUp"
+        '   Create folder with timestamp name inside backUp folder
+        My.Computer.FileSystem.CreateDirectory(backUpFolder & "\" & folderName)
+
+        mainForm.sDir = Directory.GetCurrentDirectory()
+
+        mainForm.OFD.InitialDirectory = Directory.GetCurrentDirectory()
+        mainForm.OFD.Title = "Select .omdb file"
+        '   open file using open file dialog
+        If mainForm.OFD.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+            mainForm.sFilePath = mainForm.OFD.FileName
+        Else
+            mainForm.Close()
+        End If
+
+        Dim testArray() As String = Split(mainForm.sFilePath, "\")
+        Dim sFileName As String = testArray(testArray.Length - 1)
+        mainForm.sDir = ""
+        For i As Integer = 0 To testArray.Length - 2
+            If i < testArray.Length - 2 Then
+                mainForm.sDir = mainForm.sDir & testArray(i) & "\"
+            Else
+                mainForm.sDir = mainForm.sDir & testArray(i)
+            End If
+        Next i
+        Return (folderName)
+    End Function
 
 End Module
