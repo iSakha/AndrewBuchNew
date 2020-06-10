@@ -30,6 +30,7 @@ Public Class mainForm
     Public delta As Integer     ' to increase or decrease table when push Add or Delete 
 
     Public exportDir As String
+    Public cancelFlag As Boolean = False
 
     '===================================================================================
     '             === mainForm_Load ===
@@ -58,7 +59,7 @@ Public Class mainForm
         menuItem_department.Enabled = True
         menuItem_company.Enabled = True
 
-        deleteTemp()
+        cancelFlag = False
 
     End Sub
     '===================================================================================
@@ -344,7 +345,7 @@ Public Class mainForm
     Private Sub item_belimlight_Click(sender As Object, e As EventArgs) Handles item_belimlight.Click
 
         iCompany = 1
-        create_dataset(iDepartment, iCompany)
+        create_dataset(iDepartment, iCategory)
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(252, 228, 214)
         dgv.DataSource = dts.Tables(iCompany)
@@ -361,7 +362,7 @@ Public Class mainForm
 
     Private Sub item_PRLighting_Click(sender As Object, e As EventArgs) Handles item_PRLighting.Click
         iCompany = 2
-        create_dataset(iDepartment, iCompany)
+        create_dataset(iDepartment, iCategory)
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(221, 235, 247)
         dgv.DataSource = dts.Tables(iCompany)
@@ -378,7 +379,7 @@ Public Class mainForm
 
     Private Sub item_blackout_Click(sender As Object, e As EventArgs) Handles item_blackout.Click
         iCompany = 3
-        create_dataset(iDepartment, iCompany)
+        create_dataset(iDepartment, iCategory)
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(237, 237, 237)
         dgv.DataSource = dts.Tables(iCompany)
@@ -395,7 +396,7 @@ Public Class mainForm
 
     Private Sub item_vision_Click(sender As Object, e As EventArgs) Handles item_vision.Click
         iCompany = 4
-        create_dataset(iDepartment, iCompany)
+        create_dataset(iDepartment, iCategory)
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(226, 239, 218)
         dgv.DataSource = dts.Tables(iCompany)
@@ -412,7 +413,7 @@ Public Class mainForm
 
     Private Sub item_stage_Click(sender As Object, e As EventArgs) Handles item_stage.Click
         iCompany = 5
-        create_dataset(iDepartment, iCompany)
+        create_dataset(iDepartment, iCategory)
         writeToLabelCompany(sender)
         Dim c As Color = Color.FromArgb(237, 226, 246)
         dgv.DataSource = dts.Tables(iCompany)
@@ -670,15 +671,21 @@ Public Class mainForm
     '===================================================================================
     Private Sub mainForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
 
-        compressFiles()
-        deleteTemp()
+        Select Case cancelFlag
+            Case False
 
-        Select Case MsgBox("Are you sure?", vbYesNo + vbInformation)
-            Case MsgBoxResult.Yes
+                compressFiles()
+                deleteTemp()
 
-            Case MsgBoxResult.No
-                MsgBox("What a pity!")
+                Select Case MsgBox("Are you sure?", vbYesNo + vbInformation)
+                    Case MsgBoxResult.Yes
+
+                    Case MsgBoxResult.No
+                        MsgBox("What a pity!")
+                End Select
+
+            Case True
+
         End Select
-
     End Sub
 End Class

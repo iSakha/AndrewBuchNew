@@ -46,31 +46,35 @@ Module load_and_close
     Sub createBackup(_folderName As String)
 
         Dim backUpFile, foundFile As String
-
-        '   create backup database in BackUp folder
-        backUpFile = Directory.GetCurrentDirectory() & "\BackUp\" & _folderName & "\DB.ombckp"
-        Try
-            For Each foundFile In My.Computer.FileSystem.GetFiles _
-        (mainForm.sDir, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.omdb")
-                'Console.WriteLine(foundFile)
-            Next
-            MsgBox("Создаем резервную копию базы данных в папке BackUp", vbOKOnly + vbInformation)
-            My.Computer.FileSystem.CopyFile(foundFile, backUpFile)
-        Catch
-        End Try
+        Select Case mainForm.cancelFlag
+            Case False
+                '   create backup database in BackUp folder
+                backUpFile = Directory.GetCurrentDirectory() & "\BackUp\" & _folderName & "\DB.ombckp"
+            Try
+                For Each foundFile In My.Computer.FileSystem.GetFiles _
+            (mainForm.sDir, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.omdb")
+                    'Console.WriteLine(foundFile)
+                Next
+                MsgBox("Создаем резервную копию базы данных в папке BackUp", vbOKOnly + vbInformation)
+                My.Computer.FileSystem.CopyFile(foundFile, backUpFile)
+            Catch
+            End Try
+        End Select
     End Sub
     '===================================================================================
     '             === extract files ===
     '===================================================================================
     Sub extractFiles()
+        Try
+            Using zip As ZipFile = ZipFile.Read(mainForm.sFilePath)
 
-        Using zip As ZipFile = ZipFile.Read(mainForm.sFilePath)
+                zip.Password = "iSakha2836"
+                zip.ExtractAll(mainForm.sDir & "\Temp", ExtractExistingFileAction.OverwriteSilently)
 
-            zip.Password = "iSakha2836"
-            zip.ExtractAll(mainForm.sDir & "\Temp", ExtractExistingFileAction.OverwriteSilently)
-
-        End Using
-        mainForm.sDir = mainForm.sDir & "\Temp"
+            End Using
+            mainForm.sDir = mainForm.sDir & "\Temp"
+        Catch
+        End Try
     End Sub
     '===================================================================================
     '             === Load database ===
@@ -89,61 +93,63 @@ Module load_and_close
         mainForm.i_superPivotDict = New Dictionary(Of Integer, Dictionary(Of Integer, Dictionary(Of Integer, ExcelTable)))
         mainForm.i_pivotTableDict = New Dictionary(Of Integer, Dictionary(Of Integer, ExcelTable))
         mainForm.i_pivot_wsDict = New Dictionary(Of Integer, Dictionary(Of Integer, ExcelWorksheet))
-
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles _
+        Try
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles _
 (mainForm.sDir, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.omdb")
 
-            '   Extract file name from full path
+                '   Extract file name from full path
 
-            mainForm.sFilePath = CStr(foundFile)         ' full path to database file
+                mainForm.sFilePath = CStr(foundFile)         ' full path to database file
 
-            mainForm.filePath.Add(mainForm.sFilePath)
+                mainForm.filePath.Add(mainForm.sFilePath)
 
-            Dim SplitFileName_DB() As String
-            SplitFileName_DB = Split(mainForm.sFilePath, "\")
-            name = SplitFileName_DB(SplitFileName_DB.Count - 1)
-            SplitFileName_DB = Split(name, ".")
-            name = SplitFileName_DB(0)
+                Dim SplitFileName_DB() As String
+                SplitFileName_DB = Split(mainForm.sFilePath, "\")
+                name = SplitFileName_DB(SplitFileName_DB.Count - 1)
+                SplitFileName_DB = Split(name, ".")
+                name = SplitFileName_DB(0)
 
-            mainForm.fileNames.Add(name)             ' add name of each file to name collection
-
-
-            '   Create collection of Excel files workSheets
-
-            Dim ws As ExcelWorksheet
-            Dim excelFile = New FileInfo(mainForm.sFilePath)
-            'Console.WriteLine(mainForm.sFilePath)
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial
-            Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
+                mainForm.fileNames.Add(name)             ' add name of each file to name collection
 
 
-            key = key + 1
+                '   Create collection of Excel files workSheets
 
-            mainForm.i_wsDict = New Dictionary(Of Integer, ExcelWorksheet)
+                Dim ws As ExcelWorksheet
+                Dim excelFile = New FileInfo(mainForm.sFilePath)
+                'Console.WriteLine(mainForm.sFilePath)
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+                Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
 
-            For i As Integer = 0 To Excel.Workbook.Worksheets.Count - 1
 
-                mainForm.i_xlTableDict = New Dictionary(Of Integer, ExcelTable)
+                key = key + 1
 
-                ws = Excel.Workbook.Worksheets(i)
+                mainForm.i_wsDict = New Dictionary(Of Integer, ExcelWorksheet)
 
-                mainForm.i_wsDict.Add(i, ws)
+                For i As Integer = 0 To Excel.Workbook.Worksheets.Count - 1
 
-                Dim k As Integer = 0
-                For Each tbl As ExcelTable In ws.Tables
+                    mainForm.i_xlTableDict = New Dictionary(Of Integer, ExcelTable)
 
-                    mainForm.i_xlTableDict.Add(k, tbl)
-                    k = k + 1
-                Next tbl
+                    ws = Excel.Workbook.Worksheets(i)
 
-                mainForm.i_pivotTableDict.Add(i, mainForm.i_xlTableDict)
-            Next i
+                    mainForm.i_wsDict.Add(i, ws)
 
-            mainForm.i_pivot_wsDict.Add(key - 1, mainForm.i_wsDict)
-            mainForm.i_superPivotDict.Add(key - 1, mainForm.i_pivotTableDict)
+                    Dim k As Integer = 0
+                    For Each tbl As ExcelTable In ws.Tables
 
-            mainForm.i_pivotTableDict = New Dictionary(Of Integer, Dictionary(Of Integer, ExcelTable))
-        Next
+                        mainForm.i_xlTableDict.Add(k, tbl)
+                        k = k + 1
+                    Next tbl
+
+                    mainForm.i_pivotTableDict.Add(i, mainForm.i_xlTableDict)
+                Next i
+
+                mainForm.i_pivot_wsDict.Add(key - 1, mainForm.i_wsDict)
+                mainForm.i_superPivotDict.Add(key - 1, mainForm.i_pivotTableDict)
+
+                mainForm.i_pivotTableDict = New Dictionary(Of Integer, Dictionary(Of Integer, ExcelTable))
+            Next
+        Catch
+        End Try
     End Sub
 
     '===================================================================================
@@ -205,6 +211,7 @@ Module load_and_close
         If mainForm.OFD.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
             mainForm.sFilePath = mainForm.OFD.FileName
         Else
+            mainForm.cancelFlag = True
             mainForm.Close()
         End If
 

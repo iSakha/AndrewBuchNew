@@ -354,7 +354,7 @@ Module myFunc
                 Exit Sub
             End If
         Next i
-        Console.WriteLine(dt.TableName)
+        'Console.WriteLine(dt.TableName)
         For i As Integer = 1 To mainForm.dts.Tables.Count
 
             For j As Integer = 1 To mainForm.dts.Tables(1).Columns.Count - 1
@@ -366,7 +366,7 @@ Module myFunc
         Dim qty As Integer
         Dim qty_belimlight, qty_pr, qty_black, qty_vis, qty_stage As Integer
         qty = dt.Rows(index).Item(4) + dt.Rows(index).Item(6) + dt.Rows(index).Item(8)
-        Console.WriteLine(qty)
+        'Console.WriteLine(qty)
 
         mainForm.dts.Tables(0).Rows(index).Item(mainForm.iCompany + 2) = qty
 
@@ -412,11 +412,16 @@ Module myFunc
         Dim startCellAddress As String
 
         Dim excelFile = New FileInfo(mainForm.filePath(mainForm.iDepartment + 1))
+
+        Console.WriteLine(mainForm.filePath(mainForm.iDepartment + 1))
+
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial
         Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
 
-        ws = Excel.Workbook.Worksheets(mainForm.iCategory)
+        Console.WriteLine(mainForm.iCategory)
 
+        ws = Excel.Workbook.Worksheets(mainForm.iCategory)
+        Console.WriteLine(ws.Name)
         Select Case _delta
             Case 0
                 '   Write to Exceltable
