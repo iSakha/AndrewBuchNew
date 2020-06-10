@@ -154,7 +154,7 @@ Module load_and_close
         Try
 
             Dim sFolderPath As String = mainForm.sDir               ' Temp folder
-            Console.WriteLine(sFolderPath)
+            '           Console.WriteLine(sFolderPath)
 
             Dim Files() As String = IO.Directory.GetFiles(sFolderPath)
 
@@ -219,5 +219,9 @@ Module load_and_close
         Next i
         Return (folderName)
     End Function
+
+    Sub loadFromBackup()
+
+    End Sub
 
 End Module

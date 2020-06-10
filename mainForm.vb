@@ -29,6 +29,8 @@ Public Class mainForm
 
     Public delta As Integer     ' to increase or decrease table when push Add or Delete 
 
+    Public exportDir As String
+
     '===================================================================================
     '             === mainForm_Load ===
     '===================================================================================
@@ -44,6 +46,7 @@ Public Class mainForm
     '===================================================================================
     Private Sub FolderToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FolderToolStripMenuItem.Click
 
+
         getNames()
         extractFiles()
         load_db()
@@ -54,6 +57,8 @@ Public Class mainForm
 
         menuItem_department.Enabled = True
         menuItem_company.Enabled = True
+
+        deleteTemp()
 
     End Sub
     '===================================================================================
@@ -652,16 +657,25 @@ Public Class mainForm
         'For i As Integer = 0 To i_pivot_wsDict.Count - 1
         '    Console.WriteLine(i_pivot_wsDict(iDepartment)(i).Name)
         'Next i
-        exportDataset(iDepartment)
+
     End Sub
 
 
 #End Region
+    '===================================================================================      
+    '                === Form closing ===
+    '===================================================================================
     Private Sub mainForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
 
         compressFiles()
         deleteTemp()
-        MsgBox("Are you sure?")
+
+        Select Case MsgBox("Are you sure?", vbYesNo + vbInformation)
+            Case MsgBoxResult.Yes
+
+            Case MsgBoxResult.No
+                MsgBox("What a pity!")
+        End Select
 
     End Sub
 End Class

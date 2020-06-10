@@ -1,7 +1,7 @@
 ﻿Imports OfficeOpenXml
 Imports OfficeOpenXml.Table
 Imports System.IO
-Imports System.Text.RegularExpressions
+
 Imports Ionic.Zip
 
 Module myFunc
@@ -606,7 +606,7 @@ Module myFunc
     '===================================================================================
     '             === Export dataset ===
     '===================================================================================
-    Sub exportDataset(_iDepartment As Integer)
+    Sub exportDataset(_iDepartment As Integer, _timeStampDir As String)
 
         Dim columnWidth(12) As Integer
         columnWidth = {4, 52, 9, 42, 25, 37, 11, 44, 13, 13, 13, 13}
@@ -621,21 +621,15 @@ Module myFunc
         Dim startRow(6) As Integer
         Dim rng As ExcelRange
         Dim startColumn, endRow, endColumn, tiltShift As Integer
-        Dim exportSheetName, timeStampDir As String
+        Dim exportSheetName As String
         Dim exportFileName() As String = {"LightingExport", "ScreenExport", "CommutationExport" _
         , "Truss_and_motorsExport", "ConstructionExport", "SoundExport"}
 
-        Dim format As String = ("yyy MM dd HH':'mm':'ss")
-        Dim myDate As DateTime = DateTime.Now
+        My.Computer.FileSystem.CreateDirectory(Directory.GetCurrentDirectory() & "\ExcelExport\" & _timeStampDir)
 
-        timeStampDir = myDate.ToString(format)
+        mainForm.exportDir = Directory.GetCurrentDirectory() & "\ExcelExport\" & _timeStampDir
 
-        timeStampDir = Regex.Replace(timeStampDir, "\D", "")            ' timestamp name
-
-        My.Computer.FileSystem.CreateDirectory(Directory.GetCurrentDirectory() & "\ExcelExport\" & timeStampDir)
-
-        Dim exportDir As String = Directory.GetCurrentDirectory() & "\ExcelExport\" & timeStampDir
-        Dim sPath As String = exportDir & "\" & exportFileName(_iDepartment) & ".xlsx"
+        Dim sPath As String = mainForm.exportDir & "\" & exportFileName(_iDepartment) & ".xlsx"
 
         'Console.WriteLine(mainForm.i_pivot_wsDict(_iDepartment).Count - 1)
 

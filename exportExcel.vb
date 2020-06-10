@@ -1,4 +1,5 @@
-﻿Public Class exportExcel
+﻿Imports System.Text.RegularExpressions
+Public Class exportExcel
 
     Dim exportList As List(Of Integer)
     Private Sub exportExcel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -30,6 +31,7 @@
         Select Case chbx_truss.Checked
             Case True
                 exportList.Add(3)
+                mainForm.iDepartment = 3
         End Select
 
         Select Case chbx_constr.Checked
@@ -42,10 +44,27 @@
                 exportList.Add(5)
         End Select
 
+        Dim format As String = ("yyy MM dd HH':'mm':'ss")
+        Dim myDate As DateTime = DateTime.Now
+        Dim timeStampDir As String
+
+        timeStampDir = myDate.ToString(format)
+
+        timeStampDir = Regex.Replace(timeStampDir, "\D", "")            ' timestamp name
+
         For i As Integer = 0 To exportList.Count - 1
-            exportDataset(exportList(i))
-            Console.WriteLine(exportList(i))
+            exportDataset(exportList(i), timeStampDir)
         Next i
+
+        Select Case MsgBox("Файлы Excel находятся в папке " & mainForm.exportDir & vbCrLf & "Открыть ее?" _
+               , vbYesNo + vbInformation)
+            Case MsgBoxResult.Yes
+                Me.Close()
+                Process.Start("explorer.exe", mainForm.exportDir)
+            Case MsgBoxResult.No
+                Me.Close()
+        End Select
+
     End Sub
 
     Private Sub chbx_all_CheckedChanged(sender As Object, e As EventArgs) Handles chbx_all.CheckedChanged
